@@ -1,0 +1,338 @@
+
+
+[93m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[3m◎[m [36m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23magy
+
+[m      [38;2;219;177;49m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▄[38;2;242;146;46m[48;2;246;145;46m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;240;114;54m[48;2;243;115;55m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;240;88;59m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▄[m        [94m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mAntigravity CLI 1.1.22
+[m     [38;2;158;195;69m[48;2;134;198;78m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;181;180;62m[48;2;117;180;94m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;226;153;61m[48;2;204;149;77m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;246;122;52m[48;2;239;121;71m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;248;106;53m[48;2;225;102;82m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;239;84;66m[48;2;225;79;89m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[m       [90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mtsantiagocoba@gmail.com (Google AI Pro)
+[m    [38;2;124;194;81m[48;2;128;198;84m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;113;194;92m[48;2;84;184;129m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;92;169;143m[48;2;64;151;222m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;92;145;179m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;131;115;176m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;116;111;195m[48;2;74;126;228m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;153;93;168m[48;2;112;110;206m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;156;91;151m[48;2;143;100;180m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[m      [90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mGemini 3.7 Flash (High)
+[m   [38;2;109;198;148m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▄[38;2;97;195;125m[48;2;98;186;213m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;67;174;171m[48;2;71;168;220m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[m    [38;2;74;128;234m[48;2;61;137;251m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;108;115;216m[48;2;74;129;240m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;101;121;225m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▄[m     [90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m~/Projects/webtech-wheelhouse
+[m  [38;2;103;185;244m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▄[38;2;107;199;163m[48;2;100;182;246m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;100;182;246m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[m      [38;2;56;134;251m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;72;129;244m[48;2;56;131;249m[29m[28m[27m[25m[25m[22m[24m[22m[23m▀[38;2;61;133;252m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▄
+
+[90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m────────────────────────────────────────────────────────────
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m> ME:Let's to to work in this project, next we review all instructions delivered by teacher. (The instructions written by have a
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ME: before)
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  # Lab 4 — Wheelhouse: The Application Exists
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  **Monday, August 31** · Covers Class 4 · Learning Outcome 3
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ## Objective
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  Last week you produced a specification. Today Wheelhouse becomes an application: a Rails 8 project on
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  PostgreSQL, styled with Bootstrap, serving the four public pages of the shop.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  No tables are created today and no model is written — your Lab 3 diagram becomes a schema in Lab 5.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  This lab is the frame the rest of the semester is built inside.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ## Before you start
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  All of this must be installed and working **before** the session. None of it is part of the lab, and
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  an installation problem discovered at 12:30 costs you the afternoon.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **Ruby 4.0.4** and **Rails 8.0**. Check with `ruby -v` and `rails -v`.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **Node 26.1.0** and **npm**, which comes with it. Node is not here for your JavaScript — importmap
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    handles that with no build step. It is here to compile Bootstrap's Sass, and without it `rails new`
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    fails partway through.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **PostgreSQL running locally**, and a role that can create databases. Connect to it from a terminal
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    before you write a line of Rails.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - Your `webtech-wheelhouse` repository from Lab 3, cloned on the machine you bring.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ## The deliverable
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  **The same repository as Lab 3.** `webtech-wheelhouse` keeps the URL you submitted last week and the
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  commits that are already in it: at the end of today its history is your Lab 3 work followed by today's.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  Creating a second repository, or emptying this one and pushing the application as a fresh start, does
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  not meet this requirement.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  **One repository, not two.** There is exactly one `.git` directory, the one that was already there.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  If you find a second one inside a folder Rails created, you have the application in the wrong place.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  **The application at the root.** `Gemfile`, `app/`, `config/` and everything else Rails writes sit
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  beside the `docs/` directory from Lab 3, which stays exactly where it is. Nothing goes in a
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  subdirectory: whoever clones the repository is at the application the moment the clone finishes.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  Two files that already exist in your repository also come with Rails, and only one of them matters:
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - `README.md`. Keep either version — what is graded is that the final one meets requirement 7.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - `.gitignore`. **This one matters.** The repository must end up with Rails's entries in it, whether
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    you take its file whole or merge it into yours. Leaving your Lab 3 file untouched does not meet
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    requirement 8.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  **Canvas.** Submit the URL of your repository. This lab is **individual**.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ---
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ## Requirements
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ### 1. The application
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  Created with `rails new`, with the two flags that decide the rest of the semester: PostgreSQL as the
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  database, and Bootstrap as the CSS framework. Both are chosen at creation time.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - `bin/rails about` reports **Rails 8** and the **PostgreSQL** adapter. An application on SQLite does
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    not meet this requirement, whatever else it does.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - The development and test databases exist, and the application connects to them.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - `Gemfile.lock`, `package.json` and the lock file your package manager wrote are committed.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  > The application starts with **`bin/dev`**. `bin/rails server` also starts it, and does not rebuild
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  > your CSS.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ### 2. Routes
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  Four pages, four routes, declared in `config/routes.rb`:
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  | The page | What it is for |
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  |---|---|
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  | Home | What Wheelhouse is, and the way in to the other three |
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  | Services | The list from the wall: every job the shop does, with its price |
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  | Visiting the workshop | Where the shop is, when it is open, what happens when you bring a bike in |
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  | About | Who runs the shop |
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - Home is the **root route**. Opening the application at `/` must not show the Rails welcome page.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - The other three answer at readable paths of your choosing.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - Every route is **named**, and every link is written with its route helper. A hard-coded
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    `href="/services"` does not meet this requirement.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - `bin/rails routes` lists exactly what the application answers to: nothing declared that leads
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    nowhere, nothing reachable that is not declared. What `rails new` put in that file stays — the
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    health check at `/up` is used in Class 14.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ### 3. The controller
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  **One controller, written by hand**, with one action per page. Create the file yourself, and the
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  view files with it.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - The action for the services page prepares the jobs and their prices and hands them to the view in an
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    instance variable, written **in Ruby, in the controller** — an array of hashes, or whatever shape
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    you prefer. In Lab 5 that list becomes a table and its seed data.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - Nothing here touches a database. There is no database to touch yet.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ### 4. The pages
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  The content comes from your Lab 3 documents, and from the owner's description they came from.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **The services page lists at least twelve jobs**, and the view builds the list by iterating over the
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    collection the controller gave it. Twelve rows typed into the template do not meet this requirement,
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    and it is checked by changing the array and reloading.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - Every page has one `h1`, and the outline below it does not skip levels. Templating the HTML does not
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    change what Lab 1 required of it.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **Nothing on these pages is a customer, a bicycle or a repair.** The owner was explicit: the price
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    list is public and nothing else is.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ### 5. The layout
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  `app/views/layouts/application.html.erb` holds what every page shares; each view holds only the part
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  that changes.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - The doctype, `<html>`, `<head>` and the navigation appear **once, in the layout**. A view that
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    contains any of them does not meet this requirement.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - The navigation is a **Bootstrap navbar**, links to all four pages, and collapses to a toggle on a
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    narrow screen.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - The navbar **marks which page you are currently on**. Rails has a helper that answers that question;
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    find it in the guides.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ### 6. Bootstrap, compiled and made yours
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **Bootstrap is the one you installed**, compiled from Sass into `app/assets/builds/`. A `<link>` to
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    a CDN does not meet this requirement.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - The pages use it for real: the navbar, its **grid** for at least one region that is several columns
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    wide on a laptop and one on a phone, and its table or list components for the price list.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **At least two Bootstrap Sass variables are overridden** in
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    `app/assets/stylesheets/application.bootstrap.scss`, visibly. Where the override goes relative to
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    the Bootstrap import decides whether it does anything; the Bootstrap documentation explains why.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - The site is usable at **375px** and at **1280px**, with no horizontal scrolling at either width.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ### 7. The README
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  The README is the front door of the project for the rest of the semester, and it is graded on one
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  criterion: **someone who has never seen your repository can clone it and get it running by following
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  only the README.**
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  At minimum: what Wheelhouse is and links to the documents in `docs/`; the prerequisites with their
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  versions; the setup commands in the order they must be run; and how to start the application.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ### 8. What you may not do
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **No models, no migrations, no tables.** There is not one migration in the repository at the end of
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    this lab. Lab 5 turns your Lab 3 diagram into a schema, and starting today means starting it twice.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **Nothing written for you.** The controller and the views are files you created yourself.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **No `resources`.** Declare the four routes one by one.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **No Bootstrap from a CDN**, and no second CSS framework.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **No SQLite.**
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **Nothing generated in the repository**: not `node_modules/`, not `app/assets/builds/`, and not
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    `config/master.key`. Confirm it on GitHub, not in your editor.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - **No forms that submit anything**, no authentication, no JavaScript of your own. Forms are Class 8,
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    authentication is Class 12, and Bootstrap's own JavaScript came with the installation.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ---
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ## Documentation
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  Installing, which you do before Monday:
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - [Ruby on Rails — Install Rails]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://guides.rubyonrails.org/install_ruby_on_rails.html[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m), which
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    covers Ruby, Rails and Node for every operating system
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - [PostgreSQL — Downloads]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://www.postgresql.org/download/[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m)
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  Building, which you do on Monday:
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - Rails Guides — [Getting Started]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://guides.rubyonrails.org/getting_started.html[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m),
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    [Routing]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://guides.rubyonrails.org/routing.html[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m) and
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    [Layouts and Rendering]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://guides.rubyonrails.org/layouts_and_rendering.html[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m)
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - [cssbundling-rails]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://github.com/rails/cssbundling-rails[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m) — what `--css=bootstrap` installed,
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    and what `bin/dev` runs
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - Bootstrap — [Navbar]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://getbootstrap.com/docs/5.3/components/navbar/[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m),
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    [Grid]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://getbootstrap.com/docs/5.3/layout/grid/[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m) and
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    [Sass customisation]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://getbootstrap.com/docs/5.3/customize/sass/[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m). Check in `package.json`
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    which version was installed for you, and read the documentation for that one.
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  - [Action View helpers]([34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mhttps://api.rubyonrails.org/classes/ActionView/Helpers.html[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m) — for linking,
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m    and for the current page
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ## Deadline
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  **Tuesday, September 1, 20:00**, on Canvas.
+
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  ME:Your objective is not implement this, is help me to do it by myself. The first think what I need help is to understand the
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  instructions, given that I'm not a english speaker how you can see in the errors in mi instructions.
+
+[37m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▸ Thought for 5s
+[37m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m  The assignment involves a Ruby on Rails application using PostgreSQL and Bootstr...
+[m  Welcome! I am very happy to pair program with you and guide you step-by-step.
+
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mI will not write the solution for you.[m Instead, we will break down the instructions into simple concepts, discuss how things
+[m  work, and you will write the code and run the commands yourself.
+
+[m  [39m[49m[29m[28m[27m[25m[25m[22m[24m[22m[3m(Note: If you feel more comfortable reading explanations in Spanish or another language, just let me know!)
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### Simplified Summary of Lab 4
+[m  The goal of this lab is simple: [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mCreate the basic skeleton of a Rails 8 website for the Wheelhouse bike shop.
+[m  Here are the 4 main things you are building:
+
+[m  1. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mThe Foundation:[m A Rails 8 app using [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mPostgreSQL[m and [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mBootstrap[m (compiled with Sass).
+[m  2. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mThe Structure (1 Controller, 4 Pages):
+[m      • [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mHome ([94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m/[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m)[m: Welcome & overview.
+[m      • [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mServices ([94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m/services[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m)[m: Price list (at least 12 jobs). The list must come from an array written in Ruby in the
+[m      controller, not hardcoded into HTML.
+[m      • [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mVisiting the Workshop ([94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m/visit[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m or similar)[m: Location, opening hours, how to bring a bike in.
+[m      • [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mAbout ([94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m/about[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m)[m: Information about the people running the shop.
+[m  3. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mThe Design & Layout:
+[m      • A shared Bootstrap navigation bar with mobile toggle and an indicator for the "current active page".
+[m      • At least 2 Bootstrap Sass variables customized (like primary colors or font styles).
+[m      • Fully responsive design (looks good on mobile at 375px and desktop at 1280px).
+[m  4. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mThe README:[m Clean setup instructions so anyone can clone your project and run it.
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### What is STRICTLY FORBIDDEN in this lab (Common Mistakes to Avoid)
+
+[m  • ❌ [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mNo database tables or models:[m Do [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mnot[m run migrations ([94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mrails generate model ...[m). There are no tables yet.
+[m  • ❌ [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mNo [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mresources[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m in routes:[m Write custom named routes for each page.
+[m  • ❌ [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mNo CDN links for Bootstrap:[m Bootstrap must be compiled locally from Sass via [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mbin/dev[m.
+[m  • ❌ [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mNo nested folders or new Git repos:[m Everything Rails generates must go directly into the root of your existing [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mwebtech-
+[m  [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mwheelhouse[m folder, sitting next to your existing [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mdocs/[m folder.
+[m  • ❌ [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mNo customer/bike/repair data:[m Only public information and public service prices.
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### Suggested Step-by-Step Plan
+[m  Here is the path we can take:
+
+[m  1. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mStep 1 — Prerequisites & Environment Check:[m Verify Ruby, Rails, Node, and PostgreSQL on your machine.
+[m  2. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mStep 2 — Generating Rails in the Existing Repo:[m How to run [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mrails new[m inside the current repository without overwriting
+[m  [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mdocs/[m or creating a duplicate [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m.git[m.
+[m  3. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mStep 3 — Routes & Controller:[m Creating the 4 routes in [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mconfig/routes.rb[m and manually writing the controller with the 12
+[m  services array.
+[m  4. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mStep 4 — Layout, Views & Bootstrap Styling:[m Building the shared navbar, overriding the 2 Sass variables, and structuring
+[m  the 4 views.
+[m  5. [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mStep 5 — Testing & README:[m Verifying responsiveness (375px / 1280px), checking [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mbin/rails routes[m, and writing the README.
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### Where should we start?
+[m  prompt that you'd like me to explain first?
+
+[90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m────────────────────────────────────────────────────────────
+[m  Would you like to start with [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mStep 1 (checking your local tools and environment)[m or is there a specific instruction from the
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m> okey we have the rails project do it, but I have questions with the postgresql DB. First in the instructions explain if
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  database must be in the proyect repository?
+
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mNo, the database itself is NOT stored inside the project repository.
+[m  Here is how PostgreSQL works compared to Git:
+
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### 1. Where does PostgreSQL live?
+
+[m  • [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mPostgreSQL is a background service / program[m running on your computer.
+[m  • It manages its own data files in your operating system (outside your project folder).
+[m  • Unlike SQLite (which creates a single file like [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mdevelopment.sqlite3[m in your folder), PostgreSQL is a database server.
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### 2. What [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[3mdoes[39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m go into the repository?
+
+[m  Only [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mconfiguration files[m, specifically:
+
+[m  • [34m[49m[29m[28m[27m[25m[25m[22m[4m[22m[23mdatabase.yml[m — This file tells Rails how to connect to your local PostgreSQL server (username, password, host, database
+[m  name).
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### 3. What do the instructions mean by:
+
+[m  │ [39m[49m[29m[28m[27m[25m[25m[22m[24m[22m[3m"The development and test databases exist, and the application connects to them."
+
+[m  This just means:
+
+[m  1. Your PostgreSQL server is running on your machine.
+[m  2. You run the command:
+[m    [38;5;252m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mbin/rails db:create
+[m  This tells Rails to connect to PostgreSQL and create two empty databases on your system:
+[m      • [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mwebtech_wheelhouse_development
+[m      • [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mwebtech_wheelhouse_test
+[m  3. Remember: for [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mLab 4[m, you do [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23mnot[m create any tables or run migrations ([94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mdb:migrate[m). The databases just need to exist and
+[m  connect cleanly.
+[m  ──────
+[m  Have you already run [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mbin/rails db:create[m, or would you like to check if your PostgreSQL connection is working?
+[90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m────────────────────────────────────────────────────────────
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m> I ron rails db:create, notice what I have a .envrc who lets me run bin/rails as rails, I guess is because no have a postgresql
+[34m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m  services running in background, how I do this?
+[37m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m▸ Thought for 2s
+[37m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m  The error suggests the PostgreSQL service might not be running. The user needs i...
+[m  To start PostgreSQL on Linux, you can use [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23msystemctl[m (or [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mservice[m).
+
+[m  Here are the steps:
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### Step 1: Start the PostgreSQL service
+
+[m  Run this command in your terminal:
+
+[m    [38;5;252m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23msudo systemctl start postgresql[m
+
+[m  [39m[49m[29m[28m[27m[25m[25m[22m[24m[22m[3m(If you are on WSL or an older Linux system without systemd, you can run: [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23msudo service postgresql start[39m[49m[29m[28m[27m[25m[25m[22m[24m[22m[3m)
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### Step 2: Check if it is running
+
+[m  To verify that PostgreSQL is active:
+
+[m    [38;5;252m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23msudo systemctl status postgresql
+
+[m  You should see [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mactive (running)[m in green.
+
+[m  [39m[49m[29m[28m[27m[25m[25m[22m[24m[22m[3m(Optional)[m To make PostgreSQL start automatically every time you boot your computer:
+
+[m    [38;5;252m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23msudo systemctl [38;5;31m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23menable[38;5;252m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m postgresql
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### Step 3: Important PostgreSQL check on Linux (User Role)
+
+[m  On Linux, Rails tries to connect to PostgreSQL using your Linux username (for example, [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mthaiel[m).
+
+[m  If you run [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mrails db:create[m and get an error like:
+
+[m  │ [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mFATAL: role "thaiel" does not exist
+
+[m  You need to create a PostgreSQL user matching your Linux user. You can do that with this one-line command:
+
+[m    [38;5;252m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23msudo -u postgres createuser -s -d [38;5;87m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m$USER
+
+[m  [39m[49m[29m[28m[27m[25m[25m[22m[24m[22m[3m(This creates a PostgreSQL superuser ([94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m-s[39m[49m[29m[28m[27m[25m[25m[22m[24m[22m[3m) with permission to create databases ([94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m-d[39m[49m[29m[28m[27m[25m[25m[22m[24m[22m[3m) matching your user).
+[m  ──────
+[m  [39m[49m[29m[28m[27m[25m[25m[1m[24m[22m[1m[23m### Step 4: Try creating the databases again
+
+[m  Once the service is started and the role exists:
+
+[m    [38;5;252m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mrails db:create
+
+[m  What output or message do you see when you run [94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mrails db:create[m?
+
+[90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[94m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m>[m [90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23mAccept-edits mode: file edits auto-approved (shift+tab to cycle)
+[90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m─────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+[90m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23m? for shortcuts[m                                                                            [32m[49m[29m[28m[27m[25m[25m[22m[24m[22m[23maccept-edits[39m[49m[29m[28m[27m[25m[25m[22m[24m[2m[23m · Gemini 3.7 Flash · high[m
