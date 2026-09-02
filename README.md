@@ -23,3 +23,53 @@ The complete specifications produced for this system are organized in the follow
 - [**Domain Model & Entity Lifecycle**](docs/domain-model.md) — Relational schema (DBML), entity-to-story mapping, the Model–Unit pattern defense, stored vs. derived data decisions, and the repair state machine.
 - [**Decisions Record**](docs/decisions.md) — Key business questions, operational assumptions, and architectural trade-offs.
 - [**Wireframes & Screen Navigation**](docs/wireframes.md) — Low-fidelity screen layouts, role-specific views, and navigation flow graphs.
+
+---
+
+## Prerequisites
+
+Ensure you have the following installed on your machine before setting up the application:
+
+- **Ruby:** `4.0.4` (or `3.3+`) — verify with `ruby -v`
+- **Ruby on Rails:** `8.0+` — verify with `rails -v`
+- **Node.js:** `26.1.0+` and **Yarn** / **npm** — verify with `node -v` and `yarn -v`
+- **PostgreSQL:** Running locally with permissions to create databases — verify with `psql -l`
+
+---
+
+## Setup Instructions
+
+To get the application running locally from a fresh clone, run the following commands in order:
+
+1. **Install Ruby dependencies:**
+   ```bash
+   bundle install
+   ```
+
+2. **Install JavaScript & CSS dependencies:**
+   ```bash
+   yarn install
+   ```
+
+3. **Create development and test PostgreSQL databases:**
+   ```bash
+   bin/rails db:create
+   ```
+
+4. **Compile Bootstrap Sass into CSS:**
+   ```bash
+   yarn build:css
+   ```
+
+---
+
+## Starting the Application
+
+Start the development server (which runs Puma and the Sass watcher concurrently):
+
+```bash
+bin/dev
+```
+
+Once running, open your web browser and navigate to:
+[http://localhost:3000](http://localhost:3000)
