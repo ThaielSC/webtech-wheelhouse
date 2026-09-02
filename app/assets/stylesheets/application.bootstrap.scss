@@ -1,2 +1,8 @@
+// 1. Override Bootstrap variables with color keywords BEFORE importing Bootstrap
+$primary: cadetblue; // or aquamarine / teal / darkcyan
+$secondary: darkslategray;
+$border-radius: 0.5rem;
+
+// 2. Import Bootstrap and icons
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
