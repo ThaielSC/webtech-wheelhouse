@@ -16,9 +16,9 @@
       <tbody>
         <% @services.each do |service| %>
           <tr>
-            <td class="fw-semibold"><%= service[:name] %></td>
-            <td class="text-muted"><%= service[:description] %></td>
-            <td class="text-end fw-bold text-success">$<%= service[:price] %></td>
+            <td class="fw-semibold"><%= service.name %></td>
+            <td class="text-muted"><%= service.description %></td>
+            <td class="text-end fw-bold text-success">$<%= number_with_precision(service.standard_price, precision: 2) %></td>
           </tr>
         <% end %>
       </tbody>

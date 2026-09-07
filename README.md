@@ -33,7 +33,7 @@ Ensure you have the following installed on your machine before setting up the ap
 - **Ruby:** `4.0.4` (or `3.3+`) — verify with `ruby -v`
 - **Ruby on Rails:** `8.0+` — verify with `rails -v`
 - **Node.js:** `26.1.0+` and **Yarn** / **npm** — verify with `node -v` and `yarn -v`
-- **PostgreSQL:** Running locally with permissions to create databases — verify with `psql -l`
+- **PostgreSQL:** `9.5+` running locally on port 5432 — verify with `psql -l`. The application connects via domain socket using the default role corresponding to the operating system user running Rails (or a role with permissions to create and manage PostgreSQL databases).
 
 ---
 
@@ -51,10 +51,11 @@ To get the application running locally from a fresh clone, run the following com
    yarn install
    ```
 
-3. **Create development and test PostgreSQL databases:**
+3. **Set up the database and seed data:**
    ```bash
-   bin/rails db:create
+   bin/rails db:setup
    ```
+   *(Or individually: `bin/rails db:create`, `bin/rails db:migrate`, and `bin/rails db:seed`).*
 
 4. **Compile Bootstrap Sass into CSS:**
    ```bash
