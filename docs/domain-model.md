@@ -10,63 +10,63 @@ This document presents the relational data model, entity traceability, lifecycle
 
 ```dbml
 Table customers {
-  id integer [pk, increment]
-  name varchar
-  phone varchar
-  created_at timestamp
+  id bigint [pk, increment]
+  name varchar [not null]
+  phone varchar [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
 }
 
 Table bikes {
-  id integer [pk, increment]
-  customer_id integer [ref: > customers.id]
-  make varchar
-  model varchar
-  color varchar
-  serial_number varchar [unique]
-  created_at timestamp
+  id bigint [pk, increment]
+  customer_id bigint [not null]
+  make varchar [not null]
+  model varchar [not null]
+  color varchar [not null]
+  serial_number varchar [unique, not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
 }
 
 Table staff_members {
-  id integer [pk, increment]
-  name varchar
-  role varchar
+  id bigint [pk, increment]
+  name varchar [not null]
+  role varchar [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
 }
 
 Table services {
-  id integer [pk, increment]
-  name varchar
-  description text
-  standard_price decimal
+  id bigint [pk, increment]
+  name varchar [unique, not null]
+  description text [not null]
+  standard_price decimal(8,2) [not null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
 }
 
 Table repairs {
-  id integer [pk, increment]
-  bike_id integer [ref: > bikes.id]
-  intake_by_staff_id integer [ref: > staff_members.id]
-  assigned_mechanic_id integer [ref: > staff_members.id, null]
-  status varchar
-  promised_date date
-  diagnostic_notes text
+  id bigint [pk, increment]
+  bike_id bigint [not null]
+  intake_by_staff_id bigint [not null]
+  assigned_mechanic_id bigint [null]
+  status varchar [not null, default: 'Received']
+  promised_on date [not null]
   approved_by_customer boolean [null]
-  created_at timestamp
   completed_at timestamp [null]
   picked_up_at timestamp [null]
-}
-
-Table intake_photos {
-  id integer [pk, increment]
-  repair_id integer [ref: > repairs.id]
-  photo_url varchar
-  caption varchar
-  created_at timestamp
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
 }
 
 Table repair_items {
-  id integer [pk, increment]
-  repair_id integer [ref: > repairs.id]
-  service_id integer [ref: > services.id]
-  charged_price decimal
-  notes text
+  id bigint [pk, increment]
+  repair_id bigint [not null]
+  service_id bigint [not null]
+  charged_price decimal(8,2) [not null]
+  notes text [null]
+  created_at timestamp [not null]
+  updated_at timestamp [not null]
 }
 ```
 
@@ -108,11 +108,29 @@ Table repair_items {
 | bikes | Story 1, 10 | Needed to identify physical bikes and store maintenance history by serial number. |
 | staff_members | Story 1, 6, 9 | Needed to distinguish counter staff, mechanics, and the shop owner. |
 | services | Story 7, 11, 12 | Needed for the standard price list on the wall and website. |
-| repairs | Story 1, 2, 8, 9 | Needed to track the intake, promised date, notes, and repair status. |
-| intake_photos | Story 5 | Needed to store photos of initial scratches and damage. |
+| repairs | Story 1, 2, 8, 9 | Needed to track the intake, promised date, and repair lifecycle status. |
 | repair_items | Story 7, 11 | Needed to connect services to a repair with historical prices. |
 
-## 4. Design Decisions
+## 4. Changes since Lab 3
+
+Differences between the initial conceptual domain model and the PostgreSQL schema:
+
+- **`intake_photos` table omitted**: Photo uploads and file attachments are postponed to a dedicated media handling iteration.
+- **`repairs.diagnostic_notes` column omitted**: Detailed mechanic diagnoses will move into their own structured table in a future phase.
+- **`repairs.promised_date` renamed to `promised_on`**: Follows Rails conventions (`_on` for calendar days, `_at` for timestamps).
+- **`updated_at` column added to all tables**: Added standard Rails timestamp tracking alongside `created_at`.
+- **Primary and foreign keys use `bigint`**: Standardized on PostgreSQL 64-bit integer IDs created by Rails migrations.
+- **`services.standard_price` and `repair_items.charged_price` use `decimal(8, 2)`**: Defined fixed precision and scale for currency instead of float/generic decimal.
+- **`services.name` unique index added**: Prevents duplicate service names in the catalog.
+- **`bikes.serial_number` unique index added with `NOT NULL`**: Enforces unique serial numbers for each physical bicycle at the database level.
+- **`repairs.status` defaults to `'Received'` with `NOT NULL`**: Ensures newly created repair tickets start in the initial lifecycle state.
+- **`repairs.assigned_mechanic_id` allows `NULL`**: A mechanic is assigned after counter intake, so the ticket starts without an assigned mechanic.
+- **`repairs.approved_by_customer` allows `NULL`**: The customer decision is only known after inspection and estimate.
+- **`repairs.completed_at` and `repairs.picked_up_at` allow `NULL`**: Timestamps remain null while work is pending or before customer collection.
+- **`repair_items.notes` allows `NULL`**: Custom notes on individual repair items are optional.
+- **Foreign key constraints omitted**: Foreign key database constraints and model associations are postponed to the associations milestone (Lab 7) to keep this migration focused on table structure.
+
+## 5. Design Decisions
 
 ### The Thing and the Copy of the Thing
 
