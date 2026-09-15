@@ -1,0 +1,25 @@
+<% content_for :title, "Repairs" %>
+
+<div class="container py-4">
+  <h1>Repairs</h1>
+
+  <% if @repairs.any? %>
+    <div class="table-responsive shadow-sm rounded">
+      <table class="table table-striped table-hover align-middle mb-0">
+        <thead class="table-dark">
+          <tr>
+            <th>Repair</th>
+            <th>Bike / owner</th>
+            <th>Status</th>
+            <th>Promised for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @repairs %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="alert alert-info">There are no repairs yet.</p>
+  <% end %>
+</div>

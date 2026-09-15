@@ -1,0 +1,44 @@
+<% content_for :title, bike_name(@bike) %>
+
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1><%= bike_name(@bike) %></h1>
+    <%= link_to "Back to bikes", bikes_path, class: "btn btn-outline-secondary" %>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <dl class="row mb-0">
+        <dt class="col-sm-3">Owner</dt>
+        <dd class="col-sm-9"><%= link_to @bike.customer.name, customer_path(@bike.customer) %></dd>
+
+        <dt class="col-sm-3">Color</dt>
+        <dd class="col-sm-9"><%= @bike.color %></dd>
+
+        <dt class="col-sm-3">Serial number</dt>
+        <dd class="col-sm-9"><%= @bike.serial_number %></dd>
+      </dl>
+    </div>
+  </div>
+
+  <h2 class="h3">Repairs</h2>
+  <% if @bike.repairs.any? %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Repair</th>
+            <th>Bike / owner</th>
+            <th>Status</th>
+            <th>Promised for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render @bike.repairs.order(:promised_on, :created_at) %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="alert alert-info">This bike has never been in for a repair.</p>
+  <% end %>
+</div>

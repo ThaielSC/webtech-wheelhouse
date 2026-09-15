@@ -1,0 +1,6 @@
+<tr>
+  <td><%= link_to bike_name(bike), bike_path(bike), class: "fw-semibold" %></td>
+  <td><%= link_to bike.customer.name, customer_path(bike.customer) %></td>
+  <td><%= bike.color %></td>
+  <td><%= bike.serial_number %></td>
+</tr>

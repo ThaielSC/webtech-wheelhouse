@@ -3,9 +3,14 @@ Rails.application.routes.draw do
 
   root "pages#home"
 
-  get "services", to: "pages#services", as: :services
   get "visiting-the-workshop", to: "pages#workshop", as: :workshop
   get "about", to: "pages#about", as: :about
+
+  resources :customers, only: %i[index show]
+  resources :bikes, only: %i[index show]
+  resources :repairs, only: %i[index show]
+  resources :services, only: %i[index show]
+  resources :staff_members, only: %i[index show]
 
   # Reveal health status on /up that returns 200 if the app boots with no exceptions, otherwise 500.
   # Can be used by load balancers and uptime monitors to verify that the app is live.

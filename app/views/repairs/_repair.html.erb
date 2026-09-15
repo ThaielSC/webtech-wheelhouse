@@ -1,0 +1,14 @@
+<tr class="<%= 'table-warning' if overdue_repair?(repair) %>">
+  <td><%= link_to repair_name(repair), repair_path(repair), class: "fw-semibold" %></td>
+  <td>
+    <%= link_to bike_name(repair.bike), bike_path(repair.bike) %><br>
+    <small class="text-muted"><%= link_to repair.bike.customer.name, customer_path(repair.bike.customer) %></small>
+  </td>
+  <td><span class="badge text-bg-secondary"><%= repair.status %></span></td>
+  <td>
+    <%= day(repair.promised_on) %>
+    <% if overdue_repair?(repair) %>
+      <span class="badge text-bg-warning ms-1">Overdue</span>
+    <% end %>
+  </td>
+</tr>
