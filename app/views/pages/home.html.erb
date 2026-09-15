@@ -8,6 +8,29 @@
 
   <div class="row">
     <div class="col-md-4 mb-3">
+      <h2>Customers</h2>
+      <p>See customers and the bikes they bring to the workshop.</p>
+      <%= link_to "View Customers", customers_path, class: "btn btn-primary" %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <h2>Bikes</h2>
+      <p>Browse every bike currently known to Wheelhouse.</p>
+      <%= link_to "View Bikes", bikes_path, class: "btn btn-primary" %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <h2>Repairs</h2>
+      <p>Follow repair status and promised collection dates.</p>
+      <%= link_to "View Repairs", repairs_path, class: "btn btn-primary" %>
+    </div>
+
+    <div class="col-md-4 mb-3">
+      <h2>Staff</h2>
+      <p>Meet the counter staff and mechanics.</p>
+      <%= link_to "View Staff", staff_members_path, class: "btn btn-primary" %>
+    </div>
+    <div class="col-md-4 mb-3">
       <h2>Services</h2>
       <p>Check our complete price list for all bicycle repairs.</p>
       <%= link_to "View Services", services_path, class: "btn btn-primary" %>

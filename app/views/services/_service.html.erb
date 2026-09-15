@@ -1,0 +1,5 @@
+<tr>
+  <td><%= link_to service.name, service_path(service), class: "fw-semibold" %></td>
+  <td class="text-muted"><%= service.description %></td>
+  <td class="text-end fw-bold text-success"><%= money(service.standard_price) %></td>
+</tr>

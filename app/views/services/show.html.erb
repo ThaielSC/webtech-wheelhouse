@@ -1,0 +1,41 @@
+<% content_for :title, @service.name %>
+
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1><%= @service.name %></h1>
+    <%= link_to "Back to services", services_path, class: "btn btn-outline-secondary" %>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <p><%= @service.description %></p>
+      <p class="mb-0 fs-5 fw-bold text-success"><%= money(@service.standard_price) %></p>
+    </div>
+  </div>
+
+  <h2 class="h3">Charged on repairs</h2>
+  <% if @service.repair_items.any? %>
+    <div class="table-responsive">
+      <table class="table table-striped align-middle">
+        <thead>
+          <tr>
+            <th>Repair</th>
+            <th>Bike</th>
+            <th class="text-end">Charged price</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @service.repair_items.includes(repair: :bike).each do |item| %>
+            <tr>
+              <td><%= link_to repair_name(item.repair), repair_path(item.repair) %></td>
+              <td><%= link_to bike_name(item.repair.bike), bike_path(item.repair.bike) %></td>
+              <td class="text-end"><%= money(item.charged_price) %></td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="alert alert-info">This service has not been charged on a repair yet.</p>
+  <% end %>
+</div>

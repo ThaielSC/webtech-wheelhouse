@@ -1,0 +1,37 @@
+<% content_for :title, @staff_member.name %>
+
+<div class="container py-4">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1><%= @staff_member.name %></h1>
+    <%= link_to "Back to staff", staff_members_path, class: "btn btn-outline-secondary" %>
+  </div>
+
+  <div class="card mb-4">
+    <div class="card-body">
+      <h2 class="h5">Role</h2>
+      <p class="mb-0"><%= @staff_member.role %></p>
+    </div>
+  </div>
+
+  <h2 class="h3">Repairs</h2>
+  <% repairs = (@staff_member.intake_repairs + @staff_member.assigned_repairs).uniq.sort_by(&:promised_on) %>
+  <% if repairs.any? %>
+    <div class="table-responsive">
+      <table class="table table-striped table-hover align-middle">
+        <thead>
+          <tr>
+            <th>Repair</th>
+            <th>Bike / owner</th>
+            <th>Status</th>
+            <th>Promised for</th>
+          </tr>
+        </thead>
+        <tbody>
+          <%= render repairs %>
+        </tbody>
+      </table>
+    </div>
+  <% else %>
+    <p class="alert alert-info">This staff member has no repairs yet.</p>
+  <% end %>
+</div>
