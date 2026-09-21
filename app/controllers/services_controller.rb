@@ -1,9 +1,9 @@
 class ServicesController < ApplicationController
   def index
-    @services = Service.order(:name)
+    @services = Service.by_name
   end
 
   def show
-    @service = Service.find(params[:id])
+    @service = Service.includes(repair_items: { repair: :bike }).find(params[:id])
   end
 end

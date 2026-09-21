@@ -15,7 +15,7 @@
         </dd>
 
         <dt class="col-sm-3">Status</dt>
-        <dd class="col-sm-9"><span class="badge text-bg-secondary"><%= @repair.status %></span></dd>
+        <dd class="col-sm-9"><span class="badge text-bg-secondary"><%= @repair.status_label %></span></dd>
 
         <dt class="col-sm-3">Promised for</dt>
         <dd class="col-sm-9"><%= day(@repair.promised_on) %></dd>
@@ -30,7 +30,7 @@
 
         <dt class="col-sm-3">Customer approval</dt>
         <dd class="col-sm-9">
-          <%= @repair.approved_by_customer.nil? ? "Pending" : (@repair.approved_by_customer ? "Approved" : "Declined") %>
+          <%= @repair.approved_by_customer.nil? ? "Pending" : (@repair.approved_by_customer ? "Approved" : "Rejected") %>
         </dd>
 
         <% if @repair.completed_at %>
@@ -58,7 +58,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @repair.repair_items.includes(:service).each do |item| %>
+          <% @repair.repair_items.by_service_name.each do |item| %>
             <tr>
               <td><%= link_to item.service.name, service_path(item.service) %></td>
               <td><%= item.notes.presence || "—" %></td>
@@ -69,7 +69,7 @@
         <tfoot>
           <tr>
             <th colspan="2" class="text-end">Total</th>
-            <th class="text-end"><%= money(@repair.repair_items.sum(:charged_price)) %></th>
+            <th class="text-end"><%= money(@repair.total) %></th>
           </tr>
         </tfoot>
       </table>

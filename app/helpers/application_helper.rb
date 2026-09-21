@@ -20,8 +20,4 @@ module ApplicationHelper
     return "" unless repair
     "Repair ##{repair.id}"
   end
-
-  def overdue_repair?(repair)
-    repair.promised_on.present? && repair.promised_on < Date.current && repair.picked_up_at.nil?
-  end
 end

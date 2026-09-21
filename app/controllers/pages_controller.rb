@@ -7,5 +7,4 @@ class PagesController < ApplicationController
 
   def workshop
   end
-  
 end

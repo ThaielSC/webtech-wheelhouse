@@ -34,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render @bike.repairs.order(:promised_on, :created_at) %>
+          <%= render @bike.repairs.by_promised_date %>
         </tbody>
       </table>
     </div>

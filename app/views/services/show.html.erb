@@ -25,7 +25,7 @@
           </tr>
         </thead>
         <tbody>
-          <% @service.repair_items.includes(repair: :bike).each do |item| %>
+          <% @service.repair_items.by_service_name.each do |item| %>
             <tr>
               <td><%= link_to repair_name(item.repair), repair_path(item.repair) %></td>
               <td><%= link_to bike_name(item.repair.bike), bike_path(item.repair.bike) %></td>

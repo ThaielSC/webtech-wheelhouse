@@ -1,4 +1,3 @@
-# Reset data
 RepairItem.destroy_all
 Repair.destroy_all
 Bike.destroy_all
@@ -8,13 +7,11 @@ Service.destroy_all
 
 puts "Seeding Wheelhouse database..."
 
-# Staff members
 lucas  = StaffMember.create!(name: "Lucas Morales", role: "Counter Staff")
 elena  = StaffMember.create!(name: "Elena Rostova", role: "Mechanic")
 mateo  = StaffMember.create!(name: "Mateo Valenzuela", role: "Mechanic")
 sofia  = StaffMember.create!(name: "Sofia Alarcon", role: "Mechanic")
 
-# Standard workshop services list
 srv_safety_check    = Service.create!(name: "Safety Check & Inspection", description: "Comprehensive safety inspection of frame, brakes, drivetrain, and torque settings.", standard_price: 25.00)
 srv_flat_repair     = Service.create!(name: "Flat Tire Repair / Tube Replacement", description: "Puncture inspection, rim tape check, and new tube installation.", standard_price: 15.00)
 srv_brake_adj       = Service.create!(name: "Brake Adjustment (Front & Rear)", description: "Cable tension calibration, pad alignment, and rotor/rim cleaning.", standard_price: 30.00)
@@ -37,7 +34,6 @@ srv_rotor_replace   = Service.create!(name: "Disc Brake Rotor Replacement & Trui
 srv_pedal_repair    = Service.create!(name: "Pedal Thread Repair & Heli-Coil Installation", description: "Crank arm thread cleaning, tap re-threading, and steel insert installation.", standard_price: 35.00)
 srv_wheel_build     = Service.create!(name: "Custom Wheel Build (Per Wheel)", description: "Custom lacing, tension calculation with tensiometer, and stress-relieving cycles.", standard_price: 75.00)
 
-# Customers
 c1  = Customer.create!(name: "Carlos Silva", phone: "+56 9 8765 4321")
 c2  = Customer.create!(name: "Maria Fernandez", phone: "+56 9 7654 3210")
 c3  = Customer.create!(name: "Joaquin Perez", phone: "+56 9 6543 2109")
@@ -50,7 +46,6 @@ c9  = Customer.create!(name: "Gabriel Munoz", phone: "+56 9 9988 7766")
 c10 = Customer.create!(name: "Isidora Rojas", phone: "+56 9 8877 6655")
 c11 = Customer.create!(name: "Pedro Gutierrez", phone: "+56 9 7766 5544")
 
-# Bikes
 bike1  = Bike.create!(customer_id: c1.id, make: "Trek", model: "Marlin 7", color: "Matte Nautical Navy", serial_number: "WTU1234567A")
 bike2  = Bike.create!(customer_id: c1.id, make: "Trek", model: "Marlin 7", color: "Matte Nautical Navy", serial_number: "WTU7654321B")
 bike3  = Bike.create!(customer_id: c2.id, make: "Specialized", model: "Rockhopper Comp", color: "Gloss Red", serial_number: "SN-SP-98213")
@@ -65,9 +60,7 @@ bike11 = Bike.create!(customer_id: c10.id, make: "Kona", model: "Rove AL", color
 bike12 = Bike.create!(customer_id: c11.id, make: "Marin", model: "Nicasio", color: "Gloss Silver", serial_number: "SN-MA-66789")
 bike13 = Bike.create!(customer_id: c3.id, make: "Trek", model: "FX 2 Disc", color: "Lithium Grey", serial_number: "SN-TR-88123")
 
-# Repairs
 
-# New intake waiting for mechanic allocation
 r1 = Repair.create!(
   bike_id: bike1.id,
   intake_by_staff_id: lucas.id,
@@ -81,7 +74,6 @@ r1 = Repair.create!(
 )
 RepairItem.create!(repair_id: r1.id, service_id: srv_safety_check.id, charged_price: 25.00, notes: "Initial intake check")
 
-# Inspected and diagnosed, preparing customer estimate
 r2 = Repair.create!(
   bike_id: bike3.id,
   intake_by_staff_id: lucas.id,
@@ -96,7 +88,6 @@ r2 = Repair.create!(
 RepairItem.create!(repair_id: r2.id, service_id: srv_drivetrain_cln.id, charged_price: 50.00, notes: "Heavy mud build-up")
 RepairItem.create!(repair_id: r2.id, service_id: srv_chain_replace.id, charged_price: 20.00, notes: "0.75% chain stretch")
 
-# Quoted, called customer and waiting for approval
 r3 = Repair.create!(
   bike_id: bike4.id,
   intake_by_staff_id: lucas.id,
@@ -111,7 +102,6 @@ r3 = Repair.create!(
 RepairItem.create!(repair_id: r3.id, service_id: srv_brake_bleed.id, charged_price: 45.00, notes: "Rear lever pulling to bar")
 RepairItem.create!(repair_id: r3.id, service_id: srv_rotor_replace.id, charged_price: 25.00, notes: "Rotor contaminated with oil")
 
-# Overdue ticket delayed waiting on supplier parts
 r4 = Repair.create!(
   bike_id: bike5.id,
   intake_by_staff_id: lucas.id,
@@ -126,7 +116,6 @@ r4 = Repair.create!(
 RepairItem.create!(repair_id: r4.id, service_id: srv_fork_service.id, charged_price: 85.00, notes: "Awaiting special dust wiper seals")
 RepairItem.create!(repair_id: r4.id, service_id: srv_headset_service.id, charged_price: 35.00, notes: "Crown race cleaning")
 
-# Fast puncture fix completed same day
 r5_date = 4.days.ago
 r5 = Repair.create!(
   bike_id: bike6.id,
@@ -141,7 +130,6 @@ r5 = Repair.create!(
 )
 RepairItem.create!(repair_id: r5.id, service_id: srv_flat_repair.id, charged_price: 15.00, notes: "Thorn in rear tire")
 
-# Customer declined overhaul quote and took bike
 r6 = Repair.create!(
   bike_id: bike7.id,
   intake_by_staff_id: lucas.id,
@@ -155,7 +143,6 @@ r6 = Repair.create!(
 )
 RepairItem.create!(repair_id: r6.id, service_id: srv_full_overhaul.id, charged_price: 160.00, notes: "Customer declined full overhaul quote")
 
-# First visit for Marlin: initial break-in check
 r7 = Repair.create!(
   bike_id: bike2.id,
   intake_by_staff_id: lucas.id,
@@ -170,7 +157,6 @@ r7 = Repair.create!(
 RepairItem.create!(repair_id: r7.id, service_id: srv_safety_check.id, charged_price: 25.00, notes: "Initial 30-day tune-up")
 RepairItem.create!(repair_id: r7.id, service_id: srv_derailleur_tune.id, charged_price: 35.00, notes: "Cable stretch adjustment")
 
-# Second visit for same bike: tubeless conversion on the ready rack
 r8 = Repair.create!(
   bike_id: bike2.id,
   intake_by_staff_id: lucas.id,
@@ -185,7 +171,6 @@ r8 = Repair.create!(
 RepairItem.create!(repair_id: r8.id, service_id: srv_tubeless_setup.id, charged_price: 30.00, notes: "Converted front and rear to tubeless")
 RepairItem.create!(repair_id: r8.id, service_id: srv_wheel_truing.id, charged_price: 30.00, notes: "Bundle discount with tubeless package")
 
-# Historical service from late last year before January price increases
 last_year_date = Date.new(Date.current.year - 1, 10, 14)
 r9 = Repair.create!(
   bike_id: bike8.id,
@@ -201,7 +186,6 @@ r9 = Repair.create!(
 RepairItem.create!(repair_id: r9.id, service_id: srv_safety_check.id, charged_price: 18.00, notes: "Pre-2026 labor rate")
 RepairItem.create!(repair_id: r9.id, service_id: srv_bb_service.id, charged_price: 32.00, notes: "Pre-2026 labor rate")
 
-# Ongoing cable replacement
 r10 = Repair.create!(
   bike_id: bike9.id,
   intake_by_staff_id: lucas.id,
@@ -216,7 +200,6 @@ r10 = Repair.create!(
 RepairItem.create!(repair_id: r10.id, service_id: srv_cable_replace.id, charged_price: 35.00, notes: "Club member discount")
 RepairItem.create!(repair_id: r10.id, service_id: srv_brake_adj.id, charged_price: 25.00, notes: "Club member discount")
 
-# Wheel truing complete
 r11 = Repair.create!(
   bike_id: bike10.id,
   intake_by_staff_id: lucas.id,
@@ -230,7 +213,6 @@ r11 = Repair.create!(
 )
 RepairItem.create!(repair_id: r11.id, service_id: srv_wheel_truing.id, charged_price: 35.00, notes: "Lateral wobble corrected")
 
-# Bar fitting complete
 r12 = Repair.create!(
   bike_id: bike11.id,
   intake_by_staff_id: lucas.id,
@@ -245,7 +227,6 @@ r12 = Repair.create!(
 RepairItem.create!(repair_id: r12.id, service_id: srv_bar_stem_fit.id, charged_price: 30.00, notes: "Customer brought own carbon bar")
 RepairItem.create!(repair_id: r12.id, service_id: srv_brake_adj.id, charged_price: 30.00, notes: "Re-aligned levers")
 
-# Intake for rear hub noise
 r13 = Repair.create!(
   bike_id: bike13.id,
   intake_by_staff_id: lucas.id,
@@ -259,7 +240,6 @@ r13 = Repair.create!(
 )
 RepairItem.create!(repair_id: r13.id, service_id: srv_hub_overhaul.id, charged_price: 40.00, notes: "Bearing friction in freehub")
 
-# Pedal thread repair
 r14 = Repair.create!(
   bike_id: bike4.id,
   intake_by_staff_id: lucas.id,
@@ -274,7 +254,6 @@ r14 = Repair.create!(
 RepairItem.create!(repair_id: r14.id, service_id: srv_pedal_repair.id, charged_price: 35.00, notes: "Non-drive side thread stripped")
 RepairItem.create!(repair_id: r14.id, service_id: srv_dropper_bleed.id, charged_price: 50.00, notes: "Slow return action")
 
-# Full drivetrain service
 r15 = Repair.create!(
   bike_id: bike3.id,
   intake_by_staff_id: lucas.id,
@@ -291,7 +270,6 @@ RepairItem.create!(repair_id: r15.id, service_id: srv_chain_replace.id, charged_
 RepairItem.create!(repair_id: r15.id, service_id: srv_derailleur_tune.id, charged_price: 35.00, notes: "Hanger was slightly bent")
 RepairItem.create!(repair_id: r15.id, service_id: srv_drivetrain_cln.id, charged_price: 45.00, notes: "Multi-service package discount")
 
-# Custom wheel build
 r16 = Repair.create!(
   bike_id: bike6.id,
   intake_by_staff_id: lucas.id,

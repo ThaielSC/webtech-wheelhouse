@@ -14,8 +14,7 @@
   </div>
 
   <h2 class="h3">Repairs</h2>
-  <% repairs = (@staff_member.intake_repairs + @staff_member.assigned_repairs).uniq.sort_by(&:promised_on) %>
-  <% if repairs.any? %>
+  <% if @repairs.any? %>
     <div class="table-responsive">
       <table class="table table-striped table-hover align-middle">
         <thead>
@@ -27,7 +26,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render repairs %>
+          <%= render @repairs %>
         </tbody>
       </table>
     </div>
