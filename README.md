@@ -1,76 +1,88 @@
 # Wheelhouse
 
-## What is Wheelhouse?
-
-Wheelhouse is a web-based workshop management system designed specifically for a neighbourhood bicycle repair shop. It digitizes the entire repair lifecycle—from bike intake and intake condition photo recording, to technical diagnostic estimation, customer approval, job execution, and pickup.
-
-The system replaces manual paper tags and individual mechanic notebooks with a centralized screen, eliminating status confusion, preventing mix-ups between identical bike models, tracking promised completion dates, and preserving the complete maintenance history for every physical bicycle.
-
-## Who uses it?
-
-Wheelhouse serves both internal workshop staff and external customers with role-specific access:
-
-- **Counter Staff (Front Desk):** Handles customer intake, assigns physical tags, takes intake condition photos, looks up real-time repair status when customers call or walk in, and processes bike handoffs.
-- **Mechanics (Workshop):** Documents technical diagnoses, itemizes repair jobs from the standard service catalog ("wall list"), tracks repair progress, and marks jobs ready for pickup.
-- **Shop Owner / Manager:** Monitors overall workshop throughput, oversees overdue promised dates, updates the standard price list, and reviews longitudinal service history tied to specific bike serial numbers.
-- **Customers & Public:** Accesses a public catalog displaying standard service descriptions and base prices ("wall list"), without access to internal customer records or private repair tickets.
-
-## Project Documentation
-
-The complete specifications produced for this system are organized in the following documents:
-
-- [**User Stories & Acceptance Criteria**](docs/user-stories.md) — Requirements, role motivations, INVEST story splitting, and verifiable acceptance criteria.
-- [**Domain Model & Entity Lifecycle**](docs/domain-model.md) — Relational schema (DBML), entity-to-story mapping, the Model–Unit pattern defense, stored vs. derived data decisions, and the repair state machine.
-- [**Decisions Record**](docs/decisions.md) — Key business questions, operational assumptions, and architectural trade-offs.
-- [**Wireframes & Screen Navigation**](docs/wireframes.md) — Low-fidelity screen layouts, role-specific views, and navigation flow graphs.
-
----
+Wheelhouse manages the customers, bikes, repairs, services, and staff of a bicycle workshop. All five resources can be created, edited, and deleted from the browser. Each repair records its services and the prices charged for them.
 
 ## Prerequisites
 
-Ensure you have the following installed on your machine before setting up the application:
+- Git
+- Ruby `4.0.6` and Bundler (see `.ruby-version`)
+- Node.js `25.9.0` and Yarn `1.22` (see `.node-version`)
+- PostgreSQL running locally on port `5432`; this project uses PostgreSQL 16 in development
 
-- **Ruby:** `4.0.4` (or `3.3+`) — verify with `ruby -v`
-- **Ruby on Rails:** `8.0+` — verify with `rails -v`
-- **Node.js:** `26.1.0+` and **Yarn** / **npm** — verify with `node -v` and `yarn -v`
-- **PostgreSQL:** `9.5+` running locally on port 5432 — verify with `psql -l`. The application connects via domain socket using the default role corresponding to the operating system user running Rails (or a role with permissions to create and manage PostgreSQL databases).
+Rails and the other Ruby dependencies are installed by Bundler. Bootstrap and its CSS tools are installed by Yarn.
 
----
+## Clone and install
 
-## Setup Instructions
+```bash
+git clone https://github.com/ThaielSC/webtech-wheelhouse.git
+cd webtech-wheelhouse
+bundle install
+yarn install
+```
 
-To get the application running locally from a fresh clone, run the following commands in order:
+## Prepare PostgreSQL
 
-1. **Install Ruby dependencies:**
-   ```bash
-   bundle install
-   ```
+Start your local PostgreSQL service. On macOS with Homebrew:
 
-2. **Install JavaScript & CSS dependencies:**
-   ```bash
-   yarn install
-   ```
+```bash
+brew services start postgresql@16
+```
 
-3. **Set up the database and seed data:**
-   ```bash
-   bin/rails db:setup
-   ```
-   *(Or individually: `bin/rails db:create`, `bin/rails db:migrate`, and `bin/rails db:seed`).*
+Confirm that it accepts connections:
 
-4. **Compile Bootstrap Sass into CSS:**
-   ```bash
-   yarn build:css
-   ```
+```bash
+pg_isready
+```
 
----
+The default configuration in `config/database.yml` connects locally using your operating-system username. That PostgreSQL role must exist and have permission to create databases. On macOS, Homebrew normally creates it during installation. If it is missing, create it using an existing PostgreSQL administrator account. On Linux with a local `postgres` administrator:
 
-## Starting the Application
+```bash
+sudo -u postgres createuser --createdb "$USER"
+```
 
-Start the development server (which runs Puma and the Sass watcher concurrently):
+If you use a different PostgreSQL account or server, set `username`, `password`, and `host` under `development` in `config/database.yml` to match it.
+
+## Create the database and build the CSS
+
+For a fresh clone with an empty database:
+
+```bash
+bin/rails db:setup
+yarn build:css
+```
+
+`db:setup` creates the databases, loads the schema, and seeds the development database with sample customers, bikes, repairs, services, and staff. The seed replaces existing workshop data when run again.
+
+When updating an existing checkout, install dependencies as above and apply pending migrations:
+
+```bash
+bin/rails db:migrate
+yarn build:css
+```
+
+## Start the app
 
 ```bash
 bin/dev
 ```
 
-Once running, open your web browser and navigate to:
-[http://localhost:3000](http://localhost:3000)
+This starts Rails and the CSS watcher. Open [http://localhost:3000](http://localhost:3000). Stop both processes with `Ctrl+C` in the same terminal.
+
+If port 3000 is already occupied, stop the previous server or start on another port:
+
+```bash
+PORT=3001 bin/dev
+```
+
+Then open [http://localhost:3001](http://localhost:3001).
+
+## Using the repair form
+
+A new repair offers two empty service lines. Editing a repair offers its existing lines and one extra empty line. To add more services, save the repair and open Edit again. A line with no service selected is ignored. Select “Remove this service” to delete an existing line when saving the repair.
+
+## Project documentation
+
+- [User stories and acceptance criteria](docs/user-stories.md)
+- [Domain model and entity lifecycle](docs/domain-model.md)
+- [Decisions record](docs/decisions.md)
+- [Wireframes and navigation](docs/wireframes.md)

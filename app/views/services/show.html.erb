@@ -3,7 +3,12 @@
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1><%= @service.name %></h1>
-    <%= link_to "Back to services", services_path, class: "btn btn-outline-secondary" %>
+    <div class="d-flex flex-wrap gap-2">
+      <%= link_to "Edit service", edit_service_path(@service), class: "btn btn-primary" %>
+      <%= button_to "Delete service", service_path(@service), method: :delete,
+          data: { turbo_confirm: "Delete service #{@service.name}?" }, class: "btn btn-danger" %>
+      <%= link_to "Back to services", services_path, class: "btn btn-outline-secondary" %>
+    </div>
   </div>
 
   <div class="card mb-4">
@@ -14,7 +19,7 @@
   </div>
 
   <h2 class="h3">Charged on repairs</h2>
-  <% if @service.repair_items.any? %>
+  <% if @repair_items.any? %>
     <div class="table-responsive">
       <table class="table table-striped align-middle">
         <thead>
@@ -25,11 +30,11 @@
           </tr>
         </thead>
         <tbody>
-          <% @service.repair_items.by_service_name.each do |item| %>
+          <% @repair_items.each do |repair_item| %>
             <tr>
-              <td><%= link_to repair_name(item.repair), repair_path(item.repair) %></td>
-              <td><%= link_to bike_name(item.repair.bike), bike_path(item.repair.bike) %></td>
-              <td class="text-end"><%= money(item.charged_price) %></td>
+              <td><%= link_to repair_name(repair_item.repair), repair_path(repair_item.repair) %></td>
+              <td><%= link_to bike_name(repair_item.repair.bike), bike_path(repair_item.repair.bike) %></td>
+              <td class="text-end"><%= money(repair_item.charged_price) %></td>
             </tr>
           <% end %>
         </tbody>

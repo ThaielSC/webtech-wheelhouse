@@ -1,0 +1,24 @@
+<%= form_with model: service do |form| %>
+  <%= render "shared/form_errors", record: service %>
+
+  <div class="mb-3">
+    <%= form.label :name, class: "form-label" %>
+    <%= form.text_field :name, class: form_field_class(service, :name) %>
+    <%= render "shared/field_errors", record: service, attribute: :name %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :description, class: "form-label" %>
+    <%= form.text_area :description, class: form_field_class(service, :description) %>
+    <%= render "shared/field_errors", record: service, attribute: :description %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :standard_price, class: "form-label" %>
+    <%= form.number_field :standard_price, step: "0.01", class: form_field_class(service, :standard_price) %>
+    <%= render "shared/field_errors", record: service, attribute: :standard_price %>
+  </div>
+
+  <%= form.submit class: "btn btn-primary" %>
+  <%= link_to "Cancel", service.persisted? ? service_path(service) : services_path, class: "btn btn-outline-secondary" %>
+<% end %>

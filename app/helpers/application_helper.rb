@@ -20,4 +20,16 @@ module ApplicationHelper
     return "" unless repair
     "Repair ##{repair.id}"
   end
+
+  def form_field_class(record, attribute, base_class = "form-control")
+    class_names(base_class, "is-invalid" => record.errors[attribute].any?)
+  end
+
+  def repair_status_options
+    Repair.statuses.map { |status, label| [label, status] }
+  end
+
+  def bike_option_label(bike)
+    "#{bike.serial_number} — #{bike_name(bike)} (#{bike.customer.name})"
+  end
 end

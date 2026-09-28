@@ -1,7 +1,10 @@
 <% content_for :title, "Services" %>
 
 <div class="container py-4">
-  <h1 class="mb-3">Workshop Services &amp; Price List</h1>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Workshop Services &amp; Price List</h1>
+    <%= link_to "New service", new_service_path, class: "btn btn-primary" %>
+  </div>
   <p class="lead text-secondary mb-4">The complete list of repair and maintenance services available at Wheelhouse.</p>
 
   <% if @services.any? %>

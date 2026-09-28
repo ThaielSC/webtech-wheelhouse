@@ -1,0 +1,37 @@
+<%= form_with model: bike do |form| %>
+  <%= render "shared/form_errors", record: bike %>
+
+  <div class="mb-3">
+    <%= form.label :customer_id, "Owner", class: "form-label" %>
+    <%= form.collection_select :customer_id, @customers, :id, :name,
+        { prompt: "Choose a customer" }, class: form_field_class(bike, :customer, "form-select") %>
+    <%= render "shared/field_errors", record: bike, attribute: :customer %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :make, class: "form-label" %>
+    <%= form.text_field :make, class: form_field_class(bike, :make) %>
+    <%= render "shared/field_errors", record: bike, attribute: :make %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :model, class: "form-label" %>
+    <%= form.text_field :model, class: form_field_class(bike, :model) %>
+    <%= render "shared/field_errors", record: bike, attribute: :model %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :color, class: "form-label" %>
+    <%= form.text_field :color, class: form_field_class(bike, :color) %>
+    <%= render "shared/field_errors", record: bike, attribute: :color %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :serial_number, class: "form-label" %>
+    <%= form.text_field :serial_number, class: form_field_class(bike, :serial_number) %>
+    <%= render "shared/field_errors", record: bike, attribute: :serial_number %>
+  </div>
+
+  <%= form.submit class: "btn btn-primary" %>
+  <%= link_to "Cancel", bike.persisted? ? bike_path(bike) : bikes_path, class: "btn btn-outline-secondary" %>
+<% end %>

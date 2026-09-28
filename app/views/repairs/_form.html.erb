@@ -1,0 +1,94 @@
+<%= form_with model: repair do |form| %>
+  <%= render "shared/form_errors", record: repair %>
+
+  <div class="mb-3">
+    <%= form.label :bike_id, "Bike", class: "form-label" %>
+    <%= form.collection_select :bike_id, @bikes, :id, method(:bike_option_label),
+        { prompt: "Choose a bike" }, class: form_field_class(repair, :bike, "form-select") %>
+    <%= render "shared/field_errors", record: repair, attribute: :bike %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :intake_by_staff_id, "Taken in by", class: "form-label" %>
+    <%= form.collection_select :intake_by_staff_id, @intake_staff_members, :id, :name,
+        { prompt: "Choose staff member" }, class: form_field_class(repair, :intake_by_staff, "form-select") %>
+    <%= render "shared/field_errors", record: repair, attribute: :intake_by_staff %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :assigned_mechanic_id, "Mechanic", class: "form-label" %>
+    <%= form.collection_select :assigned_mechanic_id, @mechanics, :id, :name,
+        { include_blank: "Unassigned" }, class: form_field_class(repair, :assigned_mechanic, "form-select") %>
+    <%= render "shared/field_errors", record: repair, attribute: :assigned_mechanic %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :status, class: "form-label" %>
+    <%= form.select :status, repair_status_options, {}, class: form_field_class(repair, :status, "form-select") %>
+    <%= render "shared/field_errors", record: repair, attribute: :status %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :promised_on, class: "form-label" %>
+    <%= form.date_field :promised_on, class: form_field_class(repair, :promised_on) %>
+    <%= render "shared/field_errors", record: repair, attribute: :promised_on %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :approved_by_customer, "Customer approval", class: "form-label" %>
+    <%= form.select :approved_by_customer, [["Pending", ""], ["Approved", "true"], ["Declined", "false"]],
+        {}, class: form_field_class(repair, :approved_by_customer, "form-select") %>
+    <%= render "shared/field_errors", record: repair, attribute: :approved_by_customer %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :completed_at, class: "form-label" %>
+    <%= form.datetime_field :completed_at, include_seconds: true, step: 1, class: form_field_class(repair, :completed_at) %>
+    <%= render "shared/field_errors", record: repair, attribute: :completed_at %>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :picked_up_at, class: "form-label" %>
+    <%= form.datetime_field :picked_up_at, include_seconds: true, step: 1, class: form_field_class(repair, :picked_up_at) %>
+    <%= render "shared/field_errors", record: repair, attribute: :picked_up_at %>
+  </div>
+
+  <h2 class="h4 mt-4">Services and charged prices</h2>
+  <p class="text-muted">Leave the service blank to ignore a line. Save and open Edit again to add more services.</p>
+
+  <%= form.fields_for :repair_items do |repair_item_form| %>
+    <% repair_item = repair_item_form.object %>
+    <fieldset class="border rounded p-3 mb-3">
+      <legend class="float-none w-auto px-2 fs-6">Service line <%= repair_item_form.index + 1 %></legend>
+
+      <% if repair_item.persisted? %>
+        <div class="form-check mb-3">
+          <%= repair_item_form.check_box :_destroy, class: "form-check-input" %>
+          <%= repair_item_form.label :_destroy, "Remove this service", class: "form-check-label" %>
+        </div>
+      <% end %>
+
+      <div class="mb-3">
+        <%= repair_item_form.label :service_id, "Service", class: "form-label" %>
+        <%= repair_item_form.collection_select :service_id, @services, :id, :name,
+            { include_blank: "Choose a service" }, class: form_field_class(repair_item, :service, "form-select") %>
+        <%= render "shared/field_errors", record: repair_item, attribute: :service %>
+      </div>
+
+      <div class="mb-3">
+        <%= repair_item_form.label :charged_price, class: "form-label" %>
+        <%= repair_item_form.number_field :charged_price, step: "0.01", class: form_field_class(repair_item, :charged_price) %>
+        <%= render "shared/field_errors", record: repair_item, attribute: :charged_price %>
+      </div>
+
+      <div>
+        <%= repair_item_form.label :notes, class: "form-label" %>
+        <%= repair_item_form.text_area :notes, class: form_field_class(repair_item, :notes) %>
+        <%= render "shared/field_errors", record: repair_item, attribute: :notes %>
+      </div>
+    </fieldset>
+  <% end %>
+
+  <%= form.submit class: "btn btn-primary" %>
+  <%= link_to "Cancel", repair.persisted? ? repair_path(repair) : repairs_path, class: "btn btn-outline-secondary" %>
+<% end %>

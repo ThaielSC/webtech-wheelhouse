@@ -3,7 +3,12 @@
 <div class="container py-4">
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1><%= @customer.name %></h1>
-    <%= link_to "Back to customers", customers_path, class: "btn btn-outline-secondary" %>
+    <div class="d-flex flex-wrap gap-2">
+      <%= link_to "Edit customer", edit_customer_path(@customer), class: "btn btn-primary" %>
+      <%= button_to "Delete customer", customer_path(@customer), method: :delete,
+          data: { turbo_confirm: "Delete customer #{@customer.name}?" }, class: "btn btn-danger" %>
+      <%= link_to "Back to customers", customers_path, class: "btn btn-outline-secondary" %>
+    </div>
   </div>
 
   <div class="card mb-4">
@@ -13,8 +18,11 @@
     </div>
   </div>
 
-  <h2 class="h3">Bikes</h2>
-  <% if @customer.bikes.any? %>
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="h3">Bikes</h2>
+    <%= link_to "Add bike", new_bike_path(bike: { customer_id: @customer.id }), class: "btn btn-primary" %>
+  </div>
+  <% if @bikes.any? %>
     <div class="table-responsive">
       <table class="table table-striped table-hover align-middle">
         <thead>
@@ -26,7 +34,7 @@
           </tr>
         </thead>
         <tbody>
-          <%= render @customer.bikes.by_make_model %>
+          <%= render @bikes %>
         </tbody>
       </table>
     </div>

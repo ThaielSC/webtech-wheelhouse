@@ -3,7 +3,9 @@ class Repair < ApplicationRecord
   belongs_to :intake_by_staff, class_name: "StaffMember", inverse_of: :intake_repairs
   belongs_to :assigned_mechanic, class_name: "StaffMember", optional: true, inverse_of: :assigned_repairs
 
-  has_many :repair_items, dependent: :destroy
+  has_many :repair_items, dependent: :destroy, inverse_of: :repair
+  accepts_nested_attributes_for :repair_items, allow_destroy: true,
+    reject_if: ->(attributes) { attributes["service_id"].blank? }
   has_many :services, through: :repair_items, dependent: :restrict_with_error
 
   enum :status, {
@@ -14,13 +16,14 @@ class Repair < ApplicationRecord
     ready_for_pickup: "Ready for Pickup",
     completed: "Completed",
     declined: "Declined"
-  }
+  }, validate: true
 
   validates :status, presence: true
   validates :promised_on, presence: true
 
-  validate :picked_up_not_before_intake
-  validate :handback_and_approval_consistency
+  validate :dates_not_before_intake
+  validate :pickup_requires_finished_status
+  validate :approval_decision_required_before_work
 
   scope :not_handed_back, -> { where(picked_up_at: nil) }
   scope :overdue, -> { not_handed_back.where("promised_on < ?", Date.current) }
@@ -41,21 +44,25 @@ class Repair < ApplicationRecord
 
   private
 
-  def picked_up_not_before_intake
-    if picked_up_at.present? && created_at.present? && picked_up_at.to_date < created_at.to_date
+  def dates_not_before_intake
+    intake_date = created_at&.to_date || Date.current
+
+    if picked_up_at.present? && picked_up_at.to_date < intake_date
       errors.add(:picked_up_at, "cannot be before the day the repair was received")
     end
 
-    if promised_on.present? && created_at.present? && promised_on < created_at.to_date
+    if promised_on.present? && promised_on < intake_date
       errors.add(:promised_on, "cannot be before the day the repair was received")
     end
   end
 
-  def handback_and_approval_consistency
+  def pickup_requires_finished_status
     if picked_up_at.present? && !completed? && !declined?
       errors.add(:picked_up_at, "can only be set when the repair is completed or declined")
     end
+  end
 
+  def approval_decision_required_before_work
     if (in_progress? || ready_for_pickup? || completed?) && approved_by_customer.nil?
       errors.add(:approved_by_customer, "must be recorded before the repair can proceed past approval")
     end
