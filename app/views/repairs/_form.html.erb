@@ -59,7 +59,9 @@
         class: form_field_class(repair, :intake_photos), aria: { describedby: "intake-photo-help intake-photo-errors" } %>
     <div id="intake-photo-help" class="form-text">JPEG and PNG, up to 10 MB each. New photos are added to the existing ones. After an error, choose the files again.</div>
     <div id="intake-photo-errors">
-      <%= render "shared/field_errors", record: repair, attribute: :intake_photos %>
+      <% repair.errors.full_messages_for(:intake_photos).each do |message| %>
+        <div class="invalid-feedback d-block"><%= message %></div>
+      <% end %>
     </div>
   </div>
 

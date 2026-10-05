@@ -1,3 +1,10 @@
+Repair.find_each do |repair|
+  repair.intake_photos.each do |photo|
+    photo.blob.variant_records.each { |variant| variant.image.purge }
+    photo.purge
+  end
+end
+
 RepairItem.destroy_all
 Repair.destroy_all
 Bike.destroy_all
@@ -283,5 +290,58 @@ completed_custom_wheel_repair = Repair.create!(
 )
 RepairItem.create!(repair_id: completed_custom_wheel_repair.id, service_id: custom_wheel_build.id, charged_price: 75.00, notes: "Hope Pro 4 hub on Stans Flow rim")
 RepairItem.create!(repair_id: completed_custom_wheel_repair.id, service_id: tubeless_setup.id, charged_price: 25.00, notes: "Tape and valve with wheel build")
+
+photo_files = Rails.root.join("db/seeds/photos").children.select { |path| path.extname == ".jpg" }.sort
+repairs_with_photos = [
+  received_marlin_repair,
+  diagnosed_rockhopper_repair,
+  awaiting_approval_escape_repair,
+  overdue_trail_repair,
+  completed_chameleon_repair,
+  declined_aspect_repair,
+  previous_marlin_repair,
+  ready_marlin_repair,
+  last_year_big_nine_repair,
+  in_progress_alma_repair,
+  ready_c_sport_repair,
+  completed_rove_repair
+]
+
+repairs_with_photos.each_with_index do |repair, index|
+  files = index.zero? ? photo_files : [ photo_files[index % photo_files.length] ]
+  files.each do |path|
+    File.open(path) do |file|
+      repair.intake_photos.attach(io: file, filename: path.basename.to_s, content_type: "image/jpeg")
+    end
+  end
+  repair.intake_photos.each do |photo|
+    photo.variant(:thumbnail).processed
+    photo.variant(:detail).processed
+  end
+end
+
+repairs_with_diagnoses = [
+  diagnosed_rockhopper_repair,
+  awaiting_approval_escape_repair,
+  overdue_trail_repair,
+  completed_chameleon_repair,
+  declined_aspect_repair,
+  previous_marlin_repair,
+  ready_marlin_repair,
+  last_year_big_nine_repair,
+  in_progress_alma_repair,
+  ready_c_sport_repair,
+  completed_rove_repair,
+  diagnosed_escape_repair,
+  completed_rockhopper_repair,
+  completed_custom_wheel_repair
+]
+
+repairs_with_diagnoses.each do |repair|
+  findings = repair.repair_items.includes(:service).map do |item|
+    "<li>#{ERB::Util.html_escape(item.service.name)}: #{ERB::Util.html_escape(item.notes)}</li>"
+  end.join
+  repair.update!(diagnosis: "<div><strong>Inspection findings</strong></div><ul>#{findings}</ul><blockquote>Check operation and safety before returning the bike.</blockquote>")
+end
 
 puts "Done. Seeded #{Service.count} services, #{StaffMember.count} staff, #{Customer.count} customers, #{Bike.count} bikes, and #{Repair.count} repairs (#{RepairItem.count} items)."
