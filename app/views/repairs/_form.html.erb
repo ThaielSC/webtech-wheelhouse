@@ -53,6 +53,22 @@
     <%= render "shared/field_errors", record: repair, attribute: :picked_up_at %>
   </div>
 
+  <div class="mb-3">
+    <%= form.label :intake_photos, "Intake photos", class: "form-label" %>
+    <%= form.file_field :intake_photos, multiple: true, accept: Repair::INTAKE_PHOTO_TYPES.join(","),
+        class: form_field_class(repair, :intake_photos), aria: { describedby: "intake-photo-help intake-photo-errors" } %>
+    <div id="intake-photo-help" class="form-text">JPEG and PNG, up to 10 MB each. New photos are added to the existing ones. After an error, choose the files again.</div>
+    <div id="intake-photo-errors">
+      <%= render "shared/field_errors", record: repair, attribute: :intake_photos %>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <%= form.label :diagnosis, "Diagnosis", class: "form-label" %>
+    <%= form.rich_text_area :diagnosis, class: "#{form_field_class(repair, :diagnosis)} trix-content" %>
+    <%= render "shared/field_errors", record: repair, attribute: :diagnosis %>
+  </div>
+
   <h2 class="h4 mt-4">Services and charged prices</h2>
   <p class="text-muted">Leave the service blank to ignore a line. Save and open Edit again to add more services.</p>
 

@@ -4,3 +4,22 @@ $border-radius: 0.5rem;
 
 @import 'bootstrap/scss/bootstrap';
 @import 'bootstrap-icons/font/bootstrap-icons';
+
+@import 'actiontext';
+
+.repair-thumbnail {
+  width: 6rem;
+  height: 4.5rem;
+  object-fit: cover;
+}
+
+.diagnosis-preview {
+  max-width: 22rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+trix-editor.form-control {
+  min-height: 12rem;
+}

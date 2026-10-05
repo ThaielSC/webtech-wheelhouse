@@ -1,12 +1,13 @@
 class RepairsController < ApplicationController
-  before_action :set_repair, only: %i[show edit update destroy]
+  before_action :set_repair, only: %i[show edit update destroy destroy_photo]
 
   def index
-    @repairs = Repair.includes(bike: :customer).by_promised_date
+    @repairs = Repair.with_attached_intake_photos.with_rich_text_diagnosis_and_embeds
+      .includes(bike: :customer).by_promised_date
   end
 
   def show
-    @repair_items = @repair.repair_items.includes(:service).by_service_name
+    @repair_items = @repair.repair_items.sort_by { |item| [ item.service.name, item.id ] }
   end
 
   def new
@@ -29,16 +30,28 @@ class RepairsController < ApplicationController
   end
 
   def update
-    if @repair.update(repair_params)
-      redirect_to @repair, notice: "Repair ##{@repair.id} for bike #{@repair.bike.serial_number} was updated."
+    attributes = repair_params
+    photos = attributes.delete(:intake_photos).to_a.reject(&:blank?)
+    @repair.assign_attributes(attributes)
+    @repair.intake_photos = @repair.intake_photos.blobs.to_a + photos if photos.any?
+
+    if @repair.save
+      redirect_to @repair, notice: "Repair ##{@repair.id} for bike #{@repair.bike.serial_number} was updated.", status: :see_other
     else
       prepare_form
       render :edit, status: :unprocessable_entity
     end
   end
 
+  def destroy_photo
+    @repair.intake_photos_attachments.find(params[:attachment_id]).purge
+    redirect_to @repair, notice: "Intake photo removed.", status: :see_other
+  end
+
   def destroy
+    blobs = @repair.intake_photos.blobs.to_a
     if @repair.destroy
+      blobs.each(&:purge)
       redirect_to repairs_path, status: :see_other,
         notice: "Repair ##{@repair.id} for bike #{@repair.bike.serial_number} was deleted."
     else
@@ -50,7 +63,9 @@ class RepairsController < ApplicationController
   private
 
   def set_repair
-    @repair = Repair.find(params[:id])
+    @repair = Repair.with_attached_intake_photos.with_rich_text_diagnosis_and_embeds.includes(
+      { bike: :customer }, :intake_by_staff, :assigned_mechanic, { repair_items: :service }
+    ).find(params[:id])
   end
 
   def prepare_form
@@ -63,14 +78,14 @@ class RepairsController < ApplicationController
       repair_item.new_record? && repair_item.service_id.blank?
     end
     required_empty_lines = @repair.persisted? ? 1 : 2
-    [required_empty_lines - empty_line_count, 0].max.times { @repair.repair_items.build }
+    [ required_empty_lines - empty_line_count, 0 ].max.times { @repair.repair_items.build }
   end
 
   def repair_params
     params.expect(repair: [
       :bike_id, :intake_by_staff_id, :assigned_mechanic_id, :status, :promised_on,
-      :approved_by_customer, :completed_at, :picked_up_at,
-      { repair_items_attributes: [[:id, :service_id, :charged_price, :notes, :_destroy]] }
+      :approved_by_customer, :completed_at, :picked_up_at, :diagnosis,
+      { intake_photos: [], repair_items_attributes: [ [ :id, :service_id, :charged_price, :notes, :_destroy ] ] }
     ])
   end
 end

@@ -1,9 +1,17 @@
 <tr class="<%= 'table-warning' if repair.overdue? %>">
+  <td>
+    <% if photo = repair.intake_photos.first %>
+      <%= image_tag photo.variant(:thumbnail), alt: "Intake photo of #{bike_name(repair.bike)} for #{repair_name(repair)}", class: "repair-thumbnail rounded" %>
+    <% else %>
+      <span class="repair-thumbnail rounded bg-body-secondary text-muted d-flex align-items-center justify-content-center small">No photos</span>
+    <% end %>
+  </td>
   <td><%= link_to repair_name(repair), repair_path(repair), class: "fw-semibold" %></td>
   <td>
     <%= link_to bike_name(repair.bike), bike_path(repair.bike) %><br>
     <small class="text-muted"><%= link_to repair.bike.customer.name, customer_path(repair.bike.customer) %></small>
   </td>
+  <td class="diagnosis-preview"><%= truncate(repair.diagnosis.to_plain_text.squish.presence || "No diagnosis yet.", length: 100) %></td>
   <td><span class="badge text-bg-secondary"><%= repair.status_label %></span></td>
   <td>
     <%= day(repair.promised_on) %>

@@ -6,7 +6,7 @@
     <div class="d-flex flex-wrap gap-2">
       <%= link_to "Edit repair", edit_repair_path(@repair), class: "btn btn-primary" %>
       <%= button_to "Delete repair", repair_path(@repair), method: :delete,
-          data: { turbo_confirm: "Delete repair ##{@repair.id}?" }, class: "btn btn-danger" %>
+          form: { data: { turbo_confirm: "Delete this repair and its photos and diagnosis?" } }, class: "btn btn-danger" %>
       <%= link_to "Back to repairs", repairs_path, class: "btn btn-outline-secondary" %>
     </div>
   </div>
@@ -50,6 +50,34 @@
       </dl>
     </div>
   </div>
+
+  <h2 class="h3">Intake photos</h2>
+  <% if @repair.intake_photos.any? %>
+    <div class="row g-3 mb-4">
+      <% @repair.intake_photos.each_with_index do |photo, index| %>
+        <div class="col-md-6">
+          <figure class="figure">
+            <%= link_to rails_blob_path(photo, disposition: "inline") do %>
+              <%= image_tag photo.variant(:detail), alt: "Intake photo #{index + 1} of #{bike_name(@repair.bike)} for #{repair_name(@repair)}", class: "figure-img img-fluid rounded" %>
+            <% end %>
+            <figcaption class="figure-caption mb-2">Intake photo <%= index + 1 %></figcaption>
+            <%= button_to "Remove photo #{index + 1}", intake_photo_repair_path(@repair, attachment_id: photo.id),
+              method: :delete, class: "btn btn-sm btn-outline-danger",
+              form: { data: { turbo_confirm: "Remove this intake photo permanently?" } } %>
+          </figure>
+        </div>
+      <% end %>
+    </div>
+  <% else %>
+    <p class="alert alert-info">No intake photos for this repair.</p>
+  <% end %>
+
+  <h2 class="h3">Diagnosis</h2>
+  <% if @repair.diagnosis.present? %>
+    <div class="card mb-4"><div class="card-body"><%= @repair.diagnosis %></div></div>
+  <% else %>
+    <p class="alert alert-info">No diagnosis yet.</p>
+  <% end %>
 
   <h2 class="h3">Services charged</h2>
   <% if @repair_items.any? %>

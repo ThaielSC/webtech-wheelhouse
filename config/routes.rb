@@ -6,7 +6,9 @@ Rails.application.routes.draw do
 
   resources :customers
   resources :bikes
-  resources :repairs
+  resources :repairs do
+    delete "intake_photos/:attachment_id", to: "repairs#destroy_photo", as: :intake_photo, on: :member
+  end
   resources :services
   resources :staff_members
 

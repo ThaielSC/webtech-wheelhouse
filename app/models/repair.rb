@@ -1,4 +1,13 @@
 class Repair < ApplicationRecord
+  INTAKE_PHOTO_TYPES = %w[image/jpeg image/png].freeze
+  INTAKE_PHOTO_SIZE_LIMIT = 10.megabytes
+
+  has_many_attached :intake_photos do |photo|
+    photo.variant :thumbnail, resize_to_fill: [ 96, 72 ], format: :jpeg, saver: { quality: 70, strip: true }
+    photo.variant :detail, resize_to_limit: [ 960, 720 ], format: :jpeg, saver: { quality: 80, strip: true }
+  end
+  has_rich_text :diagnosis
+
   belongs_to :bike
   belongs_to :intake_by_staff, class_name: "StaffMember", inverse_of: :intake_repairs
   belongs_to :assigned_mechanic, class_name: "StaffMember", optional: true, inverse_of: :assigned_repairs
@@ -21,6 +30,7 @@ class Repair < ApplicationRecord
   validates :status, presence: true
   validates :promised_on, presence: true
 
+  validate :acceptable_intake_photos
   validate :dates_not_before_intake
   validate :pickup_requires_finished_status
   validate :approval_decision_required_before_work
@@ -39,10 +49,22 @@ class Repair < ApplicationRecord
   end
 
   def total
-    repair_items.sum(:charged_price)
+    repair_items.to_a.sum(&:charged_price)
   end
 
   private
+
+  def acceptable_intake_photos
+    intake_photos.each do |photo|
+      unless INTAKE_PHOTO_TYPES.include?(photo.blob.content_type)
+        errors.add(:intake_photos, "#{photo.blob.filename}: only JPEG and PNG images are accepted")
+      end
+
+      if photo.blob.byte_size > INTAKE_PHOTO_SIZE_LIMIT
+        errors.add(:intake_photos, "#{photo.blob.filename}: must be 10 MB or smaller")
+      end
+    end
+  end
 
   def dates_not_before_intake
     intake_date = created_at&.to_date || Date.current
