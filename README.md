@@ -66,6 +66,36 @@ sudo -u postgres createuser --createdb "$USER"
 
 If you use a different PostgreSQL account or server, set `username`, `password`, and `host` under `development` in `config/database.yml` to match it.
 
+## Configure the API token
+
+The API token is stored only in encrypted credentials as `api.token`. Never
+commit a credentials key or a plaintext token. A local development token and
+its ignored key may already exist in your working copy.
+
+For a **fresh clone**, you do not have the author's development key. Replace
+only the encrypted development credentials with your own before starting Rails:
+
+```bash
+rm config/credentials/development.yml.enc
+EDITOR=nano bin/rails credentials:edit --environment development
+```
+
+Rails generates `config/credentials/development.key` (ignored by Git). In the
+editor, save this structure, replacing the placeholder with a randomly generated
+secret (for example, generate one with `openssl rand -hex 32`):
+
+```yaml
+api:
+  token: YOUR_RANDOM_SECRET
+```
+
+On an existing configured checkout, run only the editor command to update the
+token; do not remove credentials you can already decrypt. Keep the key private
+and back it up securely. For production use
+`EDITOR=nano bin/rails credentials:edit --environment production`, set the same
+structure, and provide that environment's key through `RAILS_MASTER_KEY`.
+The Lab 9 global encrypted credentials are preserved.
+
 ## Create the database and build the CSS
 
 For a fresh clone with an empty database:
@@ -100,6 +130,70 @@ PORT=3001 bin/dev
 
 Then open [http://localhost:3001](http://localhost:3001).
 
+## Personal page and JSON API (Lab 10)
+
+Published personal page: [Thaiel's page on GitHub Pages](https://thaielsc.github.io/webtech-lab-01/#wheelhouse).
+Its source is [webtech-lab-01](https://github.com/ThaielSC/webtech-lab-01).
+Run this API at **http://localhost:3000** for that page's Wheelhouse section to
+load the price list. Start with `bin/dev` as above, or after building CSS use
+`bin/rails server -p 3000`. The page's other sections work if the API is offline.
+Your browser may request permission for the published page to access the local
+network; allow it for this page if prompted.
+
+For local page development, clone the page repository and serve it separately:
+
+```bash
+git clone https://github.com/ThaielSC/webtech-lab-01.git
+cd webtech-lab-01
+python3 -m http.server 5500 --bind localhost
+```
+
+Open `http://localhost:5500`. CORS allows exactly that origin and
+`https://thaielsc.github.io`, only for public GET service requests.
+
+Public price list from a terminal:
+
+```bash
+curl -i http://localhost:3000/api/v1/services
+```
+
+Private repairs, after entering the token you saved in credentials:
+
+```bash
+read -rsp 'API token: ' WHEELHOUSE_TOKEN
+curl -i -H "Authorization: Bearer $WHEELHOUSE_TOKEN" \
+  'http://localhost:3000/api/v1/repairs?state=completed'
+unset WHEELHOUSE_TOKEN
+```
+
+Create a service with a Bearer header and a JSON body:
+
+```bash
+read -rsp 'API token: ' WHEELHOUSE_TOKEN
+curl -i -X POST http://localhost:3000/api/v1/services \
+  -H "Authorization: Bearer $WHEELHOUSE_TOKEN" \
+  -H 'Content-Type: application/json' \
+  --data '{"service":{"name":"Tune-up","description":"Adjust gears and brakes","standard_price":"35.20"}}'
+unset WHEELHOUSE_TOKEN
+```
+
+See [the API contract](docs/api.md) for all routes, document shapes, errors,
+price decisions and data omissions. No token is needed by the personal page.
+
+Verify the API after preparing PostgreSQL:
+
+```bash
+RAILS_ENV=test bin/rails db:prepare
+bin/rails test
+bin/rubocop
+bin/rails routes
+```
+
+Integration tests cover response shapes, HTML Accept headers, authentication,
+strong parameters, validation/malformed-body errors, CORS, read-only GETs, and
+query counts while increasing repairs and service lines. Test tokens are fixtures
+in memory and are never the development/production credentials.
+
 ## Using the repair form
 
 A new repair offers two empty service lines. Editing a repair offers its existing lines and one extra empty line. To add more services, save the repair and open Edit again. A line with no service selected is ignored. Select “Remove this service” to delete an existing line when saving the repair.
@@ -116,6 +210,7 @@ Uploaded originals and generated variants live in `storage/`, which Git ignores.
 
 ## Project documentation
 
+- [API v1 contract](docs/api.md)
 - [User stories and acceptance criteria](docs/user-stories.md)
 - [Domain model and entity lifecycle](docs/domain-model.md)
 - [Decisions record](docs/decisions.md)

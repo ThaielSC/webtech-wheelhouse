@@ -1,4 +1,12 @@
 Rails.application.routes.draw do
+  namespace :api, defaults: { format: :json } do
+    namespace :v1 do
+      resources :services, only: [ :index, :show, :create ]
+      resources :repairs, only: [ :index, :show ]
+      match "(*path)", to: "base#not_found", via: :all
+    end
+  end
+
   root "pages#home"
 
   get "visiting-the-workshop", to: "pages#workshop", as: :workshop
