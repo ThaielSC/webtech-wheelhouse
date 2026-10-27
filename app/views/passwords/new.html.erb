@@ -1,0 +1,30 @@
+<% content_for :title, "Forgot your password?" %>
+
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h1 class="h3 mb-3 fw-normal text-center">Forgot your password?</h1>
+          <p class="text-muted text-center mb-4">Enter your email address and we'll send you reset instructions.</p>
+
+          <%= form_with url: passwords_path do |form| %>
+            <div class="mb-3">
+              <%= form.label :email_address, "Email address", class: "form-label" %>
+              <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username",
+                  class: "form-control", placeholder: "you@wheelhouse.cl", value: params[:email_address] %>
+            </div>
+
+            <div class="d-grid mb-3">
+              <%= form.submit "Email reset instructions", class: "btn btn-primary btn-lg" %>
+            </div>
+          <% end %>
+
+          <div class="text-center mt-3 pt-3 border-top">
+            <%= link_to "Back to sign in", new_session_path, class: "text-decoration-none" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

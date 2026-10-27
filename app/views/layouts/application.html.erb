@@ -22,42 +22,59 @@
   <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
       <div class="container">
-        <%= link_to "Wheelhouse", root_path, class: "navbar-brand fw-bold" %>
+        <%= link_to "Wheelhouse", (authenticated? ? root_path : services_path), class: "navbar-brand fw-bold" %>
 
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarMain" aria-controls="navbarMain" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
 
         <div class="collapse navbar-collapse" id="navbarMain">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <%= link_to "Home", root_path, class: "nav-link #{'active' if current_page?(root_path)}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Customers", customers_path, class: "nav-link #{'active' if controller_name == 'customers'}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Bikes", bikes_path, class: "nav-link #{'active' if controller_name == 'bikes'}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Repairs", repairs_path, class: "nav-link #{'active' if controller_name == 'repairs'}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Services", services_path, class: "nav-link #{'active' if controller_name == 'services'}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Staff", staff_members_path, class: "nav-link #{'active' if controller_name == 'staff_members'}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "Visiting the Workshop", workshop_path, class: "nav-link #{'active' if current_page?(workshop_path)}" %>
-            </li>
-            <li class="nav-item">
-              <%= link_to "About", about_path, class: "nav-link #{'active' if current_page?(about_path)}" %>
-            </li>
+          <ul class="navbar-nav ms-auto mb-2 mb-lg-0 align-items-lg-center">
+            <% if authenticated? %>
+              <li class="nav-item">
+                <%= link_to "Home", root_path, class: "nav-link #{'active' if current_page?(root_path)}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Customers", customers_path, class: "nav-link #{'active' if controller_name == 'customers'}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Bikes", bikes_path, class: "nav-link #{'active' if controller_name == 'bikes'}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Repairs", repairs_path, class: "nav-link #{'active' if controller_name == 'repairs'}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Services", services_path, class: "nav-link #{'active' if controller_name == 'services'}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Staff", staff_members_path, class: "nav-link #{'active' if controller_name == 'staff_members'}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Visiting the Workshop", workshop_path, class: "nav-link #{'active' if current_page?(workshop_path)}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "About", about_path, class: "nav-link #{'active' if current_page?(about_path)}" %>
+              </li>
+              <li class="nav-item ms-lg-3 text-light d-flex align-items-center gap-2">
+                <span class="navbar-text text-light">
+                  <strong><%= Current.user.display_name %></strong>
+                  <span class="badge bg-secondary ms-1"><%= Current.user.role.titleize %></span>
+                </span>
+                <%= button_to "Sign out", session_path, method: :delete, class: "btn btn-outline-light btn-sm" %>
+              </li>
+            <% else %>
+              <li class="nav-item">
+                <%= link_to "Price list", services_path, class: "nav-link #{'active' if controller_name == 'services'}" %>
+              </li>
+              <li class="nav-item">
+                <%= link_to "Sign in", new_session_path, class: "nav-link #{'active' if controller_name == 'sessions'}" %>
+              </li>
+            <% end %>
           </ul>
         </div>
       </div>
     </nav>
+
 
     <main>
       <div class="container pt-3">

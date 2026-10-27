@@ -1,0 +1,16 @@
+<p>Hello,</p>
+
+<p>
+  You requested a password reset for your Wheelhouse workshop account.
+</p>
+
+<p>
+  You can choose a new password by visiting the
+  <%= link_to "Wheelhouse password reset page", edit_password_url(@user.password_reset_token) %>.
+</p>
+
+<p>
+  This link will expire in <%= distance_of_time_in_words(0, @user.password_reset_token_expires_in) %>.
+</p>
+
+<p>— The Wheelhouse Workshop Team</p>

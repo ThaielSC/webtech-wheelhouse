@@ -11,6 +11,8 @@ class Repair < ApplicationRecord
   belongs_to :bike
   belongs_to :intake_by_staff, class_name: "StaffMember", inverse_of: :intake_repairs
   belongs_to :assigned_mechanic, class_name: "StaffMember", optional: true, inverse_of: :assigned_repairs
+  belongs_to :user, optional: true
+  belongs_to :intake_user, class_name: "User", foreign_key: :user_id, optional: true
 
   has_many :repair_items, dependent: :destroy, inverse_of: :repair
   accepts_nested_attributes_for :repair_items, allow_destroy: true,

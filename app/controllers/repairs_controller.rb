@@ -3,8 +3,10 @@ class RepairsController < ApplicationController
 
   def index
     @repairs = Repair.with_attached_intake_photos.with_rich_text_diagnosis_and_embeds
-      .includes(bike: :customer).by_promised_date
+      .includes({ bike: :customer }, :intake_by_staff, user: :staff_member).by_promised_date
   end
+
+
 
   def show
     @repair_items = @repair.repair_items.sort_by { |item| [ item.service.name, item.id ] }
@@ -21,7 +23,9 @@ class RepairsController < ApplicationController
 
   def create
     @repair = Repair.new(repair_params)
+    @repair.user = Current.user
     if @repair.save
+
       redirect_to @repair, notice: "Repair ##{@repair.id} for bike #{@repair.bike.serial_number} was created."
     else
       prepare_form
@@ -64,9 +68,10 @@ class RepairsController < ApplicationController
 
   def set_repair
     @repair = Repair.with_attached_intake_photos.with_rich_text_diagnosis_and_embeds.includes(
-      { bike: :customer }, :intake_by_staff, :assigned_mechanic, { repair_items: :service }
+      { bike: :customer }, :intake_by_staff, :assigned_mechanic, { repair_items: :service }, user: :staff_member
     ).find(params[:id])
   end
+
 
   def prepare_form
     @bikes = Bike.includes(:customer).by_make_model

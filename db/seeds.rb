@@ -1,3 +1,5 @@
+Session.destroy_all
+
 Repair.find_each do |repair|
   repair.intake_photos.each do |photo|
     photo.blob.variant_records.each { |variant| variant.image.purge }
@@ -7,17 +9,27 @@ end
 
 RepairItem.destroy_all
 Repair.destroy_all
+User.destroy_all
+StaffMember.destroy_all
 Bike.destroy_all
 Customer.destroy_all
-StaffMember.destroy_all
 Service.destroy_all
 
 puts "Seeding Wheelhouse database..."
 
+marcus = StaffMember.create!(name: "Marcus Vance", role: "Owner")
 lucas = StaffMember.create!(name: "Lucas Morales", role: "Counter Staff")
 elena = StaffMember.create!(name: "Elena Rostova", role: "Mechanic")
 mateo = StaffMember.create!(name: "Mateo Valenzuela", role: "Mechanic")
 sofia = StaffMember.create!(name: "Sofia Alarcon", role: "Mechanic")
+
+marcus_user = User.create!(email_address: "marcus@wheelhouse.cl", password: "OwnerPass1234!", password_confirmation: "OwnerPass1234!", role: :owner, staff_member: marcus)
+lucas_user = User.create!(email_address: "lucas@wheelhouse.cl", password: "CounterPass1234!", password_confirmation: "CounterPass1234!", role: :counter, staff_member: lucas)
+elena_user = User.create!(email_address: "elena@wheelhouse.cl", password: "ElenaPass1234!", password_confirmation: "ElenaPass1234!", role: :mechanic, staff_member: elena)
+mateo_user = User.create!(email_address: "mateo@wheelhouse.cl", password: "MateoPass1234!", password_confirmation: "MateoPass1234!", role: :mechanic, staff_member: mateo)
+sofia_user = User.create!(email_address: "sofia@wheelhouse.cl", password: "SofiaPass1234!", password_confirmation: "SofiaPass1234!", role: :mechanic, staff_member: sofia)
+trainee_user = User.create!(email_address: "trainee@wheelhouse.cl", password: "TraineePass1234!", password_confirmation: "TraineePass1234!", role: :mechanic, staff_member: nil)
+
 
 safety_check = Service.create!(name: "Safety Check & Inspection", description: "Comprehensive safety inspection of frame, brakes, drivetrain, and torque settings.", standard_price: 25.00)
 flat_tire_repair = Service.create!(name: "Flat Tire Repair / Tube Replacement", description: "Puncture inspection, rim tape check, and new tube installation.", standard_price: 15.00)
@@ -71,6 +83,7 @@ joaquin_fx = Bike.create!(customer_id: joaquin.id, make: "Trek", model: "FX 2 Di
 received_marlin_repair = Repair.create!(
   bike_id: carlos_marlin.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: nil,
   status: "Received",
   promised_on: 2.days.from_now.to_date,
@@ -84,6 +97,7 @@ RepairItem.create!(repair_id: received_marlin_repair.id, service_id: safety_chec
 diagnosed_rockhopper_repair = Repair.create!(
   bike_id: maria_rockhopper.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: elena.id,
   status: "Diagnosed",
   promised_on: 3.days.from_now.to_date,
@@ -98,6 +112,7 @@ RepairItem.create!(repair_id: diagnosed_rockhopper_repair.id, service_id: chain_
 awaiting_approval_escape_repair = Repair.create!(
   bike_id: joaquin_escape.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: mateo.id,
   status: "Awaiting Approval",
   promised_on: 2.days.from_now.to_date,
@@ -112,6 +127,7 @@ RepairItem.create!(repair_id: awaiting_approval_escape_repair.id, service_id: ro
 overdue_trail_repair = Repair.create!(
   bike_id: valentina_trail.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: sofia.id,
   status: "In Progress",
   promised_on: 3.days.ago.to_date,
@@ -127,6 +143,7 @@ chameleon_repair_date = 4.days.ago
 completed_chameleon_repair = Repair.create!(
   bike_id: diego_chameleon.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: elena.id,
   status: "Completed",
   promised_on: chameleon_repair_date.to_date,
@@ -140,6 +157,7 @@ RepairItem.create!(repair_id: completed_chameleon_repair.id, service_id: flat_ti
 declined_aspect_repair = Repair.create!(
   bike_id: camila_aspect.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: mateo.id,
   status: "Declined",
   promised_on: 2.days.ago.to_date,
@@ -153,6 +171,7 @@ RepairItem.create!(repair_id: declined_aspect_repair.id, service_id: full_overha
 previous_marlin_repair = Repair.create!(
   bike_id: carlos_second_marlin.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: sofia.id,
   status: "Completed",
   promised_on: 45.days.ago.to_date,
@@ -167,6 +186,7 @@ RepairItem.create!(repair_id: previous_marlin_repair.id, service_id: derailleur_
 ready_marlin_repair = Repair.create!(
   bike_id: carlos_second_marlin.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: elena.id,
   status: "Ready for Pickup",
   promised_on: Date.current,
@@ -182,6 +202,7 @@ last_year_date = Date.new(Date.current.year - 1, 10, 14)
 last_year_big_nine_repair = Repair.create!(
   bike_id: andres_big_nine.id,
   intake_by_staff_id: lucas.id,
+  user: marcus_user,
   assigned_mechanic_id: mateo.id,
   status: "Completed",
   promised_on: last_year_date + 2.days,
@@ -196,6 +217,7 @@ RepairItem.create!(repair_id: last_year_big_nine_repair.id, service_id: bottom_b
 in_progress_alma_repair = Repair.create!(
   bike_id: francisca_alma.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: sofia.id,
   status: "In Progress",
   promised_on: 1.day.from_now.to_date,
@@ -210,6 +232,7 @@ RepairItem.create!(repair_id: in_progress_alma_repair.id, service_id: brake_adju
 ready_c_sport_repair = Repair.create!(
   bike_id: gabriel_c_sport.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: elena.id,
   status: "Ready for Pickup",
   promised_on: Date.current,
@@ -223,6 +246,7 @@ RepairItem.create!(repair_id: ready_c_sport_repair.id, service_id: wheel_truing.
 completed_rove_repair = Repair.create!(
   bike_id: isidora_rove.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: mateo.id,
   status: "Completed",
   promised_on: 6.days.ago.to_date,
@@ -237,6 +261,7 @@ RepairItem.create!(repair_id: completed_rove_repair.id, service_id: brake_adjust
 received_fx_repair = Repair.create!(
   bike_id: joaquin_fx.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: nil,
   status: "Received",
   promised_on: 4.days.from_now.to_date,
@@ -250,6 +275,7 @@ RepairItem.create!(repair_id: received_fx_repair.id, service_id: hub_overhaul.id
 diagnosed_escape_repair = Repair.create!(
   bike_id: joaquin_escape.id,
   intake_by_staff_id: lucas.id,
+  user: lucas_user,
   assigned_mechanic_id: sofia.id,
   status: "Diagnosed",
   promised_on: 3.days.from_now.to_date,
@@ -260,6 +286,7 @@ diagnosed_escape_repair = Repair.create!(
 )
 RepairItem.create!(repair_id: diagnosed_escape_repair.id, service_id: pedal_thread_repair.id, charged_price: 35.00, notes: "Non-drive side thread stripped")
 RepairItem.create!(repair_id: diagnosed_escape_repair.id, service_id: dropper_bleed.id, charged_price: 50.00, notes: "Slow return action")
+
 
 completed_rockhopper_repair = Repair.create!(
   bike_id: maria_rockhopper.id,
@@ -314,9 +341,11 @@ repairs_with_photos.each_with_index do |repair, index|
       repair.intake_photos.attach(io: file, filename: path.basename.to_s, content_type: "image/jpeg")
     end
   end
-  repair.intake_photos.each do |photo|
-    photo.variant(:thumbnail).processed
-    photo.variant(:detail).processed
+  if ActiveStorage.variant_transformer.present?
+    repair.intake_photos.each do |photo|
+      photo.variant(:thumbnail).processed
+      photo.variant(:detail).processed
+    end
   end
 end
 
@@ -344,4 +373,4 @@ repairs_with_diagnoses.each do |repair|
   repair.update!(diagnosis: "<div><strong>Inspection findings</strong></div><ul>#{findings}</ul><blockquote>Check operation and safety before returning the bike.</blockquote>")
 end
 
-puts "Done. Seeded #{Service.count} services, #{StaffMember.count} staff, #{Customer.count} customers, #{Bike.count} bikes, and #{Repair.count} repairs (#{RepairItem.count} items)."
+puts "Done. Seeded #{Service.count} services, #{StaffMember.count} staff, #{Customer.count} customers, #{Bike.count} bikes, #{User.count} users, and #{Repair.count} repairs (#{RepairItem.count} items)."

@@ -34,3 +34,17 @@ We assumed that one primary mechanic is assigned to each bike repair ticket. Tha
 
 ### If the Answer is Different
 If different mechanics work on different services for the same bicycle, we would remove the assigned mechanic column from the repair table and move it to the repair items table.
+
+## 4. Default Account Role and Permission Hierarchy
+
+### Decision
+Which account role has the fewest permissions in the workshop, and should therefore be the default role for new accounts?
+
+### Workshop Responsibilities & Hierarchy
+1. **Owner (`owner`)**: Exercises complete administrative control over the workshop, managing staff members, configuring service catalog prices, auditing operations, and handling shop-wide policies.
+2. **Counter Staff (`counter`)**: Front-of-house intake role. Welcomes customers, creates new customer records, registers bicycles, opens intake repair orders, negotiates customer approvals, and coordinates pickups.
+3. **Mechanic (`mechanic`)**: Back-of-house technical role. Focused strictly on executing repairs, entering diagnosis details, recording line-item services performed on bicycles, and updating completion status. Mechanics do not manage the shop catalog or handle customer contract intake.
+
+### Our Decision and Rationale
+The `mechanic` role has the fewest operational and administrative privileges among the workshop roles. In accordance with the principle of least privilege, any newly created account (such as self-registered workshop staff) defaults to `mechanic`. Elevated counter intake or owner administrative privileges must be explicitly granted by an administrator or provisioned via database seed/console.
+

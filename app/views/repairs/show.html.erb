@@ -26,7 +26,17 @@
         <dd class="col-sm-9"><%= day(@repair.promised_on) %></dd>
 
         <dt class="col-sm-3">Taken in by</dt>
-        <dd class="col-sm-9"><%= link_to @repair.intake_by_staff.name, staff_member_path(@repair.intake_by_staff) %></dd>
+        <dd class="col-sm-9">
+          <% if @repair.user %>
+            <% if @repair.user.staff_member %>
+              <%= link_to @repair.user.staff_member.name, staff_member_path(@repair.user.staff_member) %>
+            <% else %>
+              <%= @repair.user.email_address %>
+            <% end %>
+          <% else %>
+            <%= link_to @repair.intake_by_staff.name, staff_member_path(@repair.intake_by_staff) %>
+          <% end %>
+        </dd>
 
         <dt class="col-sm-3">Mechanic</dt>
         <dd class="col-sm-9">

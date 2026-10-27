@@ -1,0 +1,48 @@
+<% content_for :title, "Sign up" %>
+
+<div class="container py-4">
+  <div class="row justify-content-center">
+    <div class="col-md-6 col-lg-5">
+      <div class="card shadow-sm">
+        <div class="card-body p-4">
+          <h1 class="h3 mb-3 fw-normal text-center">Create an account</h1>
+          <p class="text-muted text-center mb-4">Workshop account registration for Wheelhouse staff</p>
+
+          <%= form_with model: @user, url: registration_path do |form| %>
+            <%= render "shared/form_errors", record: @user %>
+
+            <div class="mb-3">
+              <%= form.label :email_address, "Email address", class: "form-label" %>
+              <%= form.email_field :email_address, required: true, autofocus: true, autocomplete: "username",
+                  class: form_field_class(@user, :email_address), placeholder: "you@wheelhouse.cl", value: @user.email_address %>
+              <%= render "shared/field_errors", record: @user, attribute: :email_address %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :password, "Password (minimum 10 characters)", class: "form-label" %>
+              <%= form.password_field :password, required: true, autocomplete: "new-password",
+                  class: form_field_class(@user, :password), placeholder: "Enter a secure password", maxlength: 72, value: "" %>
+              <%= render "shared/field_errors", record: @user, attribute: :password %>
+            </div>
+
+            <div class="mb-3">
+              <%= form.label :password_confirmation, "Confirm password", class: "form-label" %>
+              <%= form.password_field :password_confirmation, required: true, autocomplete: "new-password",
+                  class: form_field_class(@user, :password_confirmation), placeholder: "Confirm your password", maxlength: 72, value: "" %>
+              <%= render "shared/field_errors", record: @user, attribute: :password_confirmation %>
+            </div>
+
+            <div class="d-grid mb-3">
+              <%= form.submit "Create account", class: "btn btn-primary btn-lg" %>
+            </div>
+          <% end %>
+
+          <div class="text-center mt-3 pt-3 border-top">
+            <span class="text-muted">Already have an account?</span>
+            <%= link_to "Sign in", new_session_path, class: "text-decoration-none ms-1" %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

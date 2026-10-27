@@ -26,7 +26,7 @@ module ApplicationHelper
   end
 
   def repair_status_options
-    Repair.statuses.map { |status, label| [label, status] }
+    Repair.statuses.map { |status, label| [ label, status ] }
   end
 
   def bike_option_label(bike)

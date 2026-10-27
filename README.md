@@ -130,6 +130,35 @@ PORT=3001 bin/dev
 
 Then open [http://localhost:3001](http://localhost:3001).
 
+## Workshop Accounts & Authentication (Lab 11)
+
+Only the service price list (`/services`) and authentication pages (`/session/new`, `/registration/new`, `/passwords/*`) are publicly accessible without signing in. Accessing any other page in the application requires an active session.
+
+### Development seed accounts
+
+The development database is seeded with accounts for the workshop team, plus an unassigned account with the default role. **These accounts exist only in the development environment**:
+
+| Staff Member | Workshop Role | Email Address | Development Password |
+|---|---|---|---|
+| Marcus Vance | `owner` | `marcus@wheelhouse.cl` | `OwnerPass1234!` |
+| Lucas Morales | `counter` | `lucas@wheelhouse.cl` | `CounterPass1234!` |
+| Elena Rostova | `mechanic` | `elena@wheelhouse.cl` | `ElenaPass1234!` |
+| Mateo Valenzuela | `mechanic` | `mateo@wheelhouse.cl` | `MateoPass1234!` |
+| Sofia Alarcon | `mechanic` | `sofia@wheelhouse.cl` | `SofiaPass1234!` |
+| *(None / Trainee)* | `mechanic` *(default)* | `trainee@wheelhouse.cl` | `TraineePass1234!` |
+
+New accounts created through the registration form (`/registration/new`) default to the `mechanic` role (the role with the fewest permissions; see [Decisions record](docs/decisions.md#4-default-account-role-and-permission-hierarchy)). Role elevation or staff linking is managed via seeds or console.
+
+### Reading emails in development
+
+The application never uses external SMTP services, mail providers, or remote credentials. All emails generated in development (such as new account welcome emails and password reset links) are delivered locally to files using Action Mailer's `:file` delivery method:
+
+- **Location of sent emails:** `tmp/mails/` (named after the recipient's email address, e.g., `tmp/mails/lucas@wheelhouse.cl`).
+- **Reading an email:** Open the file in any text editor or with `cat tmp/mails/<recipient_email>`.
+- **Testing password reset:** When requesting a reset at `/passwords/new`, inspect the file generated in `tmp/mails/`, copy the reset link (`http://localhost:3000/passwords/<token>/edit`), open it in your local browser, submit a new password of at least 10 characters, and sign in.
+- **Mailer previews:** You can also preview email layouts in the browser at [http://localhost:3000/rails/mailers](http://localhost:3000/rails/mailers) (`PasswordsMailer` and `UserMailer`).
+
+
 ## Personal page and JSON API (Lab 10)
 
 Published personal page: [Thaiel's page on GitHub Pages](https://thaielsc.github.io/webtech-lab-01/#wheelhouse).
