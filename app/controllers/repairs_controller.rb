@@ -2,28 +2,37 @@ class RepairsController < ApplicationController
   before_action :set_repair, only: %i[show edit update destroy destroy_photo]
 
   def index
-    @repairs = Repair.with_attached_intake_photos.with_rich_text_diagnosis_and_embeds
-      .includes({ bike: :customer }, :intake_by_staff, user: :staff_member).by_promised_date
+    authorize Repair
+    @repairs = policy_scope(Repair).with_attached_intake_photos.with_rich_text_diagnosis_and_embeds
+      .includes({ bike: :customer }, :intake_by_staff, user: :staff_member)
+    @repairs = @repairs.where(status: Repair.statuses[params[:state]]) if Repair.statuses.key?(params[:state])
+    @repairs = @repairs.overdue if params[:overdue] == "1"
+    @repairs = @repairs.by_promised_date
   end
 
 
 
   def show
+    authorize @repair
     @repair_items = @repair.repair_items.sort_by { |item| [ item.service.name, item.id ] }
   end
 
   def new
+    authorize Repair
     @repair = Repair.new(params.key?(:repair) ? repair_params : {})
     prepare_form
   end
 
   def edit
+    authorize @repair
     prepare_form
   end
 
   def create
+    authorize Repair
     @repair = Repair.new(repair_params)
     @repair.user = Current.user
+    @repair.intake_by_staff = Current.user.staff_member
     if @repair.save
 
       redirect_to @repair, notice: "Repair ##{@repair.id} for bike #{@repair.bike.serial_number} was created."
@@ -34,6 +43,7 @@ class RepairsController < ApplicationController
   end
 
   def update
+    authorize @repair
     attributes = repair_params
     photos = attributes.delete(:intake_photos).to_a.reject(&:blank?)
     @repair.assign_attributes(attributes)
@@ -48,11 +58,13 @@ class RepairsController < ApplicationController
   end
 
   def destroy_photo
+    authorize @repair
     @repair.intake_photos_attachments.find(params[:attachment_id]).purge
     redirect_to @repair, notice: "Intake photo removed.", status: :see_other
   end
 
   def destroy
+    authorize @repair
     blobs = @repair.intake_photos.blobs.to_a
     if @repair.destroy
       blobs.each(&:purge)
@@ -87,10 +99,6 @@ class RepairsController < ApplicationController
   end
 
   def repair_params
-    params.expect(repair: [
-      :bike_id, :intake_by_staff_id, :assigned_mechanic_id, :status, :promised_on,
-      :approved_by_customer, :completed_at, :picked_up_at, :diagnosis,
-      { intake_photos: [], repair_items_attributes: [ [ :id, :service_id, :charged_price, :notes, :_destroy ] ] }
-    ])
+    params.expect(repair: policy(@repair || Repair).permitted_attributes)
   end
 end

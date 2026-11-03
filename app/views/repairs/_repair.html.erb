@@ -8,14 +8,14 @@
   </td>
   <td><%= link_to repair_name(repair), repair_path(repair), class: "fw-semibold" %></td>
   <td>
-    <%= link_to bike_name(repair.bike), bike_path(repair.bike) %><br>
-    <small class="text-muted"><%= link_to repair.bike.customer.name, customer_path(repair.bike.customer) %></small>
+    <%= policy(repair.bike).show? ? link_to(bike_name(repair.bike), bike_path(repair.bike)) : bike_name(repair.bike) %><br>
+    <small class="text-muted"><%= policy(repair.bike.customer).show? ? link_to(repair.bike.customer.name, customer_path(repair.bike.customer)) : repair.bike.customer.name %></small>
   </td>
   <td>
     <% if repair.user %>
       <%= repair.user.display_name %>
     <% else %>
-      <%= repair.intake_by_staff.name %>
+      <%= repair.intake_by_staff&.name || "Unknown" %>
     <% end %>
   </td>
   <td class="diagnosis-preview"><%= truncate(repair.diagnosis.to_plain_text.squish.presence || "No diagnosis yet.", length: 100) %></td>

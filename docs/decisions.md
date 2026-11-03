@@ -48,3 +48,9 @@ Which account role has the fewest permissions in the workshop, and should theref
 ### Our Decision and Rationale
 The `mechanic` role has the fewest operational and administrative privileges among the workshop roles. In accordance with the principle of least privilege, any newly created account (such as self-registered workshop staff) defaults to `mechanic`. Elevated counter intake or owner administrative privileges must be explicitly granted by an administrator or provisioned via database seed/console.
 
+
+## Lab 12: public and authentication actions
+
+The public service index and show display the price list, with repair details scoped to the visitor. The home, about and workshop pages require a session; they are informational pages rather than model operations. Registration, session and password reset actions are exempt from policy verification because they establish or recover authentication (sign-out terminates the current session). Rails health and the API use separate framework/API controllers; API token authorization and its contract remain unchanged. All resource indexes use policy scopes.
+
+A repair is handed back at the lifecycle's `completed` state. The legacy staff reference for intake is optional because an authorized counter or owner account need not be linked to staff; the intake account is always recorded from the session.

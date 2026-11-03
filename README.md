@@ -138,14 +138,14 @@ Only the service price list (`/services`) and authentication pages (`/session/ne
 
 The development database is seeded with accounts for the workshop team, plus an unassigned account with the default role. **These accounts exist only in the development environment**:
 
-| Staff Member | Workshop Role | Email Address | Development Password |
-|---|---|---|---|
-| Marcus Vance | `owner` | `marcus@wheelhouse.cl` | `OwnerPass1234!` |
-| Lucas Morales | `counter` | `lucas@wheelhouse.cl` | `CounterPass1234!` |
-| Elena Rostova | `mechanic` | `elena@wheelhouse.cl` | `ElenaPass1234!` |
-| Mateo Valenzuela | `mechanic` | `mateo@wheelhouse.cl` | `MateoPass1234!` |
-| Sofia Alarcon | `mechanic` | `sofia@wheelhouse.cl` | `SofiaPass1234!` |
-| *(None / Trainee)* | `mechanic` *(default)* | `trainee@wheelhouse.cl` | `TraineePass1234!` |
+| Staff Member | Workshop Role | Email Address | Development Password | Permissions |
+|---|---|---|---|---|
+| Marcus Vance | `owner` | `marcus@wheelhouse.cl` | `OwnerPass1234!` | Everything, including services and staff. |
+| Lucas Morales | `counter` | `lucas@wheelhouse.cl` | `CounterPass1234!` | Customers, bikes and repairs at the counter. |
+| Elena Rostova | `mechanic` | `elena@wheelhouse.cl` | `ElenaPass1234!` | Assigned repairs and their diagnosis, state and photos. |
+| Mateo Valenzuela | `mechanic` | `mateo@wheelhouse.cl` | `MateoPass1234!` | Assigned repairs and their diagnosis, state and photos. |
+| Sofia Alarcon | `mechanic` | `sofia@wheelhouse.cl` | `SofiaPass1234!` | Assigned repairs and their diagnosis, state and photos. |
+| *(None / Trainee)* | `mechanic` *(default)* | `trainee@wheelhouse.cl` | `TraineePass1234!` | Reads services and staff; has no assigned repairs. |
 
 New accounts created through the registration form (`/registration/new`) default to the `mechanic` role (the role with the fewest permissions; see [Decisions record](docs/decisions.md#4-default-account-role-and-permission-hierarchy)). Role elevation or staff linking is managed via seeds or console.
 
@@ -222,6 +222,8 @@ Integration tests cover response shapes, HTML Accept headers, authentication,
 strong parameters, validation/malformed-body errors, CORS, read-only GETs, and
 query counts while increasing repairs and service lines. Test tokens are fixtures
 in memory and are never the development/production credentials.
+
+See [permissions](docs/permissions.md) for the complete rules.
 
 ## Using the repair form
 

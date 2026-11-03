@@ -2,24 +2,29 @@ class StaffMembersController < ApplicationController
   before_action :set_staff_member, only: %i[show edit update destroy]
 
   def index
-    @staff_members = StaffMember.by_role_and_name
+    authorize StaffMember
+    @staff_members = policy_scope(StaffMember).by_role_and_name
   end
 
   def show
-    @repairs = Repair.where(intake_by_staff_id: @staff_member.id)
-                     .or(Repair.where(assigned_mechanic_id: @staff_member.id))
-                     .includes(bike: :customer)
+    authorize @staff_member
+    @repairs = policy_scope(Repair).where(intake_by_staff_id: @staff_member.id)
+                     .or(policy_scope(Repair).where(assigned_mechanic_id: @staff_member.id))
+                     .with_attached_intake_photos.with_rich_text_diagnosis_and_embeds.includes({ bike: :customer }, :intake_by_staff, user: :staff_member)
                      .by_promised_date
   end
 
   def new
+    authorize StaffMember
     @staff_member = StaffMember.new
   end
 
   def edit
+    authorize @staff_member
   end
 
   def create
+    authorize StaffMember
     @staff_member = StaffMember.new(staff_member_params)
     if @staff_member.save
       redirect_to @staff_member, notice: "Staff member #{@staff_member.name} was created."
@@ -29,6 +34,7 @@ class StaffMembersController < ApplicationController
   end
 
   def update
+    authorize @staff_member
     if @staff_member.update(staff_member_params)
       redirect_to @staff_member, notice: "Staff member #{@staff_member.name} was updated."
     else
@@ -37,6 +43,7 @@ class StaffMembersController < ApplicationController
   end
 
   def destroy
+    authorize @staff_member
     if @staff_member.destroy
       redirect_to staff_members_path, notice: "Staff member #{@staff_member.name} was deleted.", status: :see_other
     else

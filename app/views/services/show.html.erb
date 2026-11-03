@@ -4,8 +4,8 @@
   <div class="d-flex justify-content-between align-items-center mb-3">
     <h1><%= @service.name %></h1>
     <div class="d-flex flex-wrap gap-2">
-      <% if authenticated? %>
-        <%= link_to "Edit service", edit_service_path(@service), class: "btn btn-primary" %>
+        <%= link_to "Edit service", edit_service_path(@service), class: "btn btn-primary" if policy(@service).edit? %>
+      <% if policy(@service).destroy? %>
         <%= button_to "Delete service", service_path(@service), method: :delete,
             data: { turbo_confirm: "Delete service #{@service.name}?" }, class: "btn btn-danger" %>
       <% end %>
@@ -36,7 +36,7 @@
           <% @repair_items.each do |repair_item| %>
             <tr>
               <td><%= link_to repair_name(repair_item.repair), repair_path(repair_item.repair) %></td>
-              <td><%= link_to bike_name(repair_item.repair.bike), bike_path(repair_item.repair.bike) %></td>
+              <td><%= policy(repair_item.repair.bike).show? ? link_to(bike_name(repair_item.repair.bike), bike_path(repair_item.repair.bike)) : bike_name(repair_item.repair.bike) %></td>
               <td class="text-end"><%= money(repair_item.charged_price) %></td>
             </tr>
           <% end %>

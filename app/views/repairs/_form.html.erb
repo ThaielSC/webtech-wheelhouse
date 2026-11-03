@@ -1,26 +1,24 @@
 <%= form_with model: repair do |form| %>
   <%= render "shared/form_errors", record: repair %>
 
+  <% if policy(repair).permitted_attributes.include?(:bike_id) %>
   <div class="mb-3">
     <%= form.label :bike_id, "Bike", class: "form-label" %>
     <%= form.collection_select :bike_id, @bikes, :id, method(:bike_option_label),
         { prompt: "Choose a bike" }, class: form_field_class(repair, :bike, "form-select") %>
     <%= render "shared/field_errors", record: repair, attribute: :bike %>
   </div>
+  <% end %>
 
-  <div class="mb-3">
-    <%= form.label :intake_by_staff_id, "Taken in by", class: "form-label" %>
-    <%= form.collection_select :intake_by_staff_id, @intake_staff_members, :id, :name,
-        { prompt: "Choose staff member" }, class: form_field_class(repair, :intake_by_staff, "form-select") %>
-    <%= render "shared/field_errors", record: repair, attribute: :intake_by_staff %>
-  </div>
 
+  <% if policy(repair).permitted_attributes.include?(:assigned_mechanic_id) %>
   <div class="mb-3">
     <%= form.label :assigned_mechanic_id, "Mechanic", class: "form-label" %>
     <%= form.collection_select :assigned_mechanic_id, @mechanics, :id, :name,
         { include_blank: "Unassigned" }, class: form_field_class(repair, :assigned_mechanic, "form-select") %>
     <%= render "shared/field_errors", record: repair, attribute: :assigned_mechanic %>
   </div>
+  <% end %>
 
   <div class="mb-3">
     <%= form.label :status, class: "form-label" %>
@@ -28,30 +26,38 @@
     <%= render "shared/field_errors", record: repair, attribute: :status %>
   </div>
 
+  <% if policy(repair).permitted_attributes.include?(:promised_on) %>
   <div class="mb-3">
     <%= form.label :promised_on, class: "form-label" %>
     <%= form.date_field :promised_on, class: form_field_class(repair, :promised_on) %>
     <%= render "shared/field_errors", record: repair, attribute: :promised_on %>
   </div>
+  <% end %>
 
+  <% if policy(repair).permitted_attributes.include?(:approved_by_customer) %>
   <div class="mb-3">
     <%= form.label :approved_by_customer, "Customer approval", class: "form-label" %>
     <%= form.select :approved_by_customer, [["Pending", ""], ["Approved", "true"], ["Declined", "false"]],
         {}, class: form_field_class(repair, :approved_by_customer, "form-select") %>
     <%= render "shared/field_errors", record: repair, attribute: :approved_by_customer %>
   </div>
+  <% end %>
 
+  <% if policy(repair).permitted_attributes.include?(:completed_at) %>
   <div class="mb-3">
     <%= form.label :completed_at, class: "form-label" %>
     <%= form.datetime_field :completed_at, include_seconds: true, step: 1, class: form_field_class(repair, :completed_at) %>
     <%= render "shared/field_errors", record: repair, attribute: :completed_at %>
   </div>
+  <% end %>
 
+  <% if policy(repair).permitted_attributes.include?(:picked_up_at) %>
   <div class="mb-3">
     <%= form.label :picked_up_at, class: "form-label" %>
     <%= form.datetime_field :picked_up_at, include_seconds: true, step: 1, class: form_field_class(repair, :picked_up_at) %>
     <%= render "shared/field_errors", record: repair, attribute: :picked_up_at %>
   </div>
+  <% end %>
 
   <div class="mb-3">
     <%= form.label :intake_photos, "Intake photos", class: "form-label" %>
@@ -71,6 +77,7 @@
     <%= render "shared/field_errors", record: repair, attribute: :diagnosis %>
   </div>
 
+  <% if policy(repair).permitted_attributes.any? { |attribute| attribute.is_a?(Hash) && attribute.key?(:repair_items_attributes) } %>
   <h2 class="h4 mt-4">Services and charged prices</h2>
   <p class="text-muted">Leave the service blank to ignore a line. Save and open Edit again to add more services.</p>
 
@@ -105,6 +112,8 @@
         <%= render "shared/field_errors", record: repair_item, attribute: :notes %>
       </div>
     </fieldset>
+  <% end %>
+
   <% end %>
 
   <%= form.submit class: "btn btn-primary" %>

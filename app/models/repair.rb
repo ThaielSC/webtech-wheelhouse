@@ -9,7 +9,7 @@ class Repair < ApplicationRecord
   has_rich_text :diagnosis
 
   belongs_to :bike
-  belongs_to :intake_by_staff, class_name: "StaffMember", inverse_of: :intake_repairs
+  belongs_to :intake_by_staff, class_name: "StaffMember", optional: true, inverse_of: :intake_repairs
   belongs_to :assigned_mechanic, class_name: "StaffMember", optional: true, inverse_of: :assigned_repairs
   belongs_to :user, optional: true
   belongs_to :intake_user, class_name: "User", foreign_key: :user_id, optional: true
